@@ -1,0 +1,118 @@
+<odoo>
+     <!-- this will define record in database : -->
+    <record id="view_student_list" model="ir.ui.view"> 
+        <!-- and this will model="ir.ui.view" so through this we can create views in xml (list,form,etc.) :-  -->
+        <!-- Which type of the view you want to define you define the name here this is internal name of view: -->
+        <field name="name">student.list</field>
+
+        <!-- This will telll which model is related to what :-  -->
+        <field name="model">student.student</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="roll_no"/>
+                <field name="dob"/>
+                <field name="gender"/>
+                <field name="admission_date"/>
+                <field name="is_active"/>   
+                <field name="age"/>
+                <field name="image"/>  
+            </list>
+        </field>
+    </record>
+
+<record id="view_student_form" model="ir.ui.view">
+    <field name="name">student.form</field>
+    <field name="model">student.student</field>
+    <field name="arch" type="xml">
+        <form string="Student">
+            <sheet>
+                
+
+                <group>
+                    <field name="image" widget="image" class="oe_avatar" nolabel="1"
+                           style="max-width: 150px; float: right; margin-bottom: 30px;"/>
+                </group>
+                <group>
+                    <group>
+                        <field name="name"/>
+                        <field name="roll_no"/>
+                        <field name="dob"/>
+                        <field name="gender"/>
+                    </group>
+                    <group> 
+                        <field name="email"/>
+                        <field name="phone"/>
+                        <field name="admission_date"/>
+                        <field name="is_active"/>
+                        <field name="age"/>
+                    </group>
+                </group>
+
+                <notebook>
+                    <page string="Notes">
+                        <field name="notes"/>
+                    </page>
+                    <page string="Extra Info">
+                        <field name="full_detail" readonly="1"/>
+                    </page>
+                </notebook>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+
+
+    <record id="view_student_search" model="ir.ui.view">
+        <field name="name">student.search</field>
+        <field name="model">student.student</field>
+        <field name="arch" type="xml">
+            <search>
+                <!-- searching by name  -->
+                <field name="name"/> 
+                <!-- searching by Roll no : -->
+                <field name="roll_no"/>
+
+                <filter string="Active" name="active" domain="[('is_active','=',True)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Gender" name="group_gender" context="{'group_by':'gender'}"/>
+                    <!-- <filter string="Admission Date" name="group_admission" context="{'group_by':'admission_date'}"/> -->
+                </group>
+            </search>
+        </field>
+    </record>
+
+<record id="view_student_kanban" model="ir.ui.view">
+    <field name="name">student.kanban</field>
+    <field name="model">student.student</field>
+    <field name="arch" type="xml">
+        <kanban default_group_by="gender" class="o_kanban_view student_kanban">
+            <templates>
+                <t t-name="kanban-box">
+                    <div class="oe_kanban_global_click o_kanban_record student_card"
+                         style="display: flex; flex-direction: column; padding: 8px; width: 220px; margin: 3px; border: 1px solid #ddd; border-radius: 5px;">
+
+                           <div class="oe_kanban_details" style="font-size: 13px;">
+                            <strong><field name="name"/></strong>
+                            <div>Roll No: <field name="roll_no"/></div>
+                            <div>Date of Birth: <field name="dob"/></div>
+                            <div>Gender: <field name="gender"/></div>
+                            <div>Admission Date: <field name="admission_date"/></div>   
+                            <div>Age: <field name="age"/></div>
+                        </div>
+
+                
+                        <div class="o_kanban_image" style="align-self: flex-end; margin-top: 5px;">
+                            <img t-att-src="kanban_image('student.student', 'image', record.id.value)"
+                                 class="img"
+                                 style="width: 40px; height: 40px; object-fit: cover; border-radius: 50%;"/>
+                        </div>
+                    </div>
+                </t>
+            </templates>
+        </kanban>
+    </field>
+</record>
+
+</odoo>

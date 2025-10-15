@@ -1,0 +1,12 @@
+<odoo>
+    <record id="demo_student_1" model="student.student">
+        <field name="name">John Doe</field>
+        <field name="roll_no">101</field>
+        <field name="age">18</field>
+        <field name="gender">male</field>
+        <field name="admission_date">2025-06-01</field>
+        <field name="is_active">True</field>
+        <field name="email">john@example.com</field>
+        <field name="phone">1234567890</field>
+    </record>
+</odoo>

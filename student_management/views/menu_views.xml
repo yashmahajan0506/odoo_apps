@@ -1,0 +1,14 @@
+<odoo>
+ 
+<record id="action_student" model="ir.actions.act_window">
+    <field name="name">Students</field>
+    <field name="res_model">student.student</field>
+    <field name="view_mode">kanban,list,form</field>
+</record>
+
+
+  <menuitem id="menu_student_root" name="Student Information" sequence="10"/>
+<menuitem id="menu_student" name="Students" parent="menu_student_root"
+          action="action_student" sequence="20"/>
+
+</odoo>
