@@ -1,0 +1,22 @@
+<odoo>
+  <record id="rule_student_own_student" model="ir.rule">
+    <field name="name">Students: see own student</field>
+    <field name="model_id" ref="model_student_student"/>
+    <field name="domain_force">[('user_id','=', user.id)]</field>
+    <field name="groups" eval="[(4, ref('student_management.group_school_student'))]"/>
+  </record>
+
+  <record id="rule_student_own_subject_lines" model="ir.rule">
+    <field name="name">Students: see own subject lines</field>
+    <field name="model_id" ref="model_student_subject_line"/>
+    <field name="domain_force">[('student_id.user_id','=', user.id)]</field>
+    <field name="groups" eval="[(4, ref('student_management.group_school_student'))]"/>
+  </record>
+
+  <record id="rule_student_cant_create_student" model="ir.rule">
+    <field name="name">Students: no create student</field>
+    <field name="model_id" ref="model_student_student"/>
+  <field name="domain_force">[(1,'=',0)]</field>
+    <field name="groups" eval="[(4, ref('student_management.group_school_student'))]"/>
+  </record>
+</odoo>

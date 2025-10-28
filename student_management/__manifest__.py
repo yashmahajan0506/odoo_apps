@@ -26,7 +26,9 @@
 
     # always loaded
     'data': [
+        'security/security.xml',
         'security/ir.model.access.csv',
+        'security/record_rules.xml',
         'views/menu_views.xml',      
         'views/student_views.xml',
 
@@ -35,7 +37,6 @@
     'application': True,
     'auto_install': False,
 
-    # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',
     ],

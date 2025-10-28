@@ -40,6 +40,7 @@
                             <field name="admission_date"/>
                             <field name="is_active"/>
                             <field name="age"/>
+                            <field name="user_id" context="{'default_groups_id': [(6, 0, [])]}"/> 
                         </group>
                     </group>
 
@@ -56,14 +57,19 @@
                             <field name="full_detail" readonly="1"/>
                         </page>
 
-                        <page string="Subjects">
-                            <field name="subject_ids">
-                                <list editable="bottom">
-                                    <field name="name"/>
-                                    <field name="code"/>
-                                </list>
-                            </field>
-                        </page>
+                       <page string="Subjects">
+                    <field name="subject_line_ids">
+                         <list editable="bottom">
+                             <field name="subject_id"/>
+                             <field name="subject_code"/>
+                             <field name="marks"/>
+                             <field name="grade"/>
+                         </list>
+                     </field>
+                            
+                     <!-- this is something -->
+</page>
+
                     </notebook>
                 </sheet>
             </form>
