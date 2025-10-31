@@ -6,7 +6,7 @@
 
     'description':  """A simple Student Management module""",
 
-    'author': "Yash",
+    'author': "Yash",                            
     'website': "https://wanbuffer.com/",
 
     'assets': {
@@ -19,21 +19,21 @@
     # Check https://github.com/odoo/odoo/blob/15.0/odoo/addons/base/data/ir_module_category_data.xml
     # for the full list
     'category': 'Education',
-    'version': '1.0',
+    'version': '1.0',   
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    'depends': ['base','mail'],
 
     # always loaded
     'data': [
         'security/security.xml',
-        'security/ir.model.access.csv',
         'security/record_rules.xml',
-        'views/menu_views.xml',      
+        'security/ir.model.access.csv',
         'views/student_views.xml',
+        'views/menu.xml',      
 
     ],
-    'installable': True,
+    'installable':True,
     'application': True,
     'auto_install': False,
 

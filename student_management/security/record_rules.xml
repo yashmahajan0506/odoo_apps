@@ -1,22 +1,38 @@
 <odoo>
-  <record id="rule_student_own_student" model="ir.rule">
-    <field name="name">Students: see own student</field>
-    <field name="model_id" ref="model_student_student"/>
-    <field name="domain_force">[('user_id','=', user.id)]</field>
-    <field name="groups" eval="[(4, ref('student_management.group_school_student'))]"/>
-  </record>
+    <data noupdate="1">
 
-  <record id="rule_student_own_subject_lines" model="ir.rule">
-    <field name="name">Students: see own subject lines</field>
-    <field name="model_id" ref="model_student_subject_line"/>
-    <field name="domain_force">[('student_id.user_id','=', user.id)]</field>
-    <field name="groups" eval="[(4, ref('student_management.group_school_student'))]"/>
-  </record>
-
-  <record id="rule_student_cant_create_student" model="ir.rule">
-    <field name="name">Students: no create student</field>
+<!--    
+        <record id="rule_student_see_own" model="ir.rule">
+            <field name="name">Student: See Own Record Only</field>
+            <field name="model_id" ref="model_student_student"/>
+            <field name="domain_force">[('user_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('student_management.group_student_user'))]"/>
+        </record> -->
+        <record id="rule_student_see_own" model="ir.rule">
+    <field name="name">Student: See Own Record Only</field>
     <field name="model_id" ref="model_student_student"/>
-  <field name="domain_force">[(1,'=',0)]</field>
-    <field name="groups" eval="[(4, ref('student_management.group_school_student'))]"/>
-  </record>
+    <field name="domain_force">[('user_id', '=', user.id)]</field>
+    <field name="groups" eval="[(4, ref('student_management.group_student_user'))]"/>
+</record>
+
+
+        <record id="rule_teacher_see_all" model="ir.rule">
+            <field name="name">Teacher: See All Students</field>
+            <field name="model_id" ref="model_student_student"/>
+            <!-- <field name="domain_force">[(1, '=', 1)]</field> -->
+            <field name="groups" eval="[(4, ref('student_management.group_teacher_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="rule_admin_see_all" model="ir.rule">
+            <field name="name">Admin: See All Students</field>
+            <field name="model_id" ref="model_student_student"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('student_management.group_student_admin'))]"/>
+        </record>
+
+    </data>
 </odoo>

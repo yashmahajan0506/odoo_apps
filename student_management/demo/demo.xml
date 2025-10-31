@@ -1,12 +1,26 @@
 <odoo>
-    <record id="demo_student_1" model="student.student">
-        <field name="name">John Doe</field>
-        <field name="roll_no">101</field>
-        <field name="age">18</field>
-        <field name="gender">male</field>
-        <field name="admission_date">2025-06-01</field>
-        <field name="is_active">True</field>
-        <field name="email">john@example.com</field>
-        <field name="phone">1234567890</field>
-    </record>
+    <data noupdate="0">
+        <record id="demo_student_1" model="student.student">
+            <field name="name">John Doe</field>
+            <field name="roll_no">101</field>
+            <field name="dob">2007-05-12</field> 
+            <field name="age">18</field>
+            <field name="gender">male</field>
+            <field name="admission_date">2025-06-01</field>
+            <field name="is_active">True</field>
+            <field name="email">john@example.com</field>
+            <field name="phone">1234567890</field>
+        </record>
+
+        <record id="demo_student_2" model="student.student">
+            <field name="name">Jane Smith</field>
+            <field name="roll_no">102</field>
+            <field name="dob">2008-07-20</field> 
+            <field name="gender">female</field>
+            <field name="admission_date">2025-07-15</field>
+            <field name="is_active">True</field>
+            <field name="email">jane@example.com</field>
+            <field name="phone">9876543210</field>
+        </record>
+    </data>
 </odoo>

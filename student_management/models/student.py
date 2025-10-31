@@ -1,12 +1,17 @@
 from odoo import models, fields, api
 from datetime import date
 from odoo.exceptions import UserError
+from dateutil.relativedelta import relativedelta
 
 class Student(models.Model):
     _name = 'student.student'
     _description = 'Student Information'
+    _inherit=['mail.thread','mail.activity.mixin']
 
-    name = fields.Char(string='Name')
+    # _inherit = ['mail.thread', 'mail.activity.mixin']
+ 
+    
+    name = fields.Char(string='Name', tracking=True)
     roll_no = fields.Integer(string='Roll Number', required=True, default=False)
     dob = fields.Date(string="Date of Birth", required=True)
     age = fields.Integer(string='Age', compute='_compute_age', store=True)
@@ -22,11 +27,21 @@ class Student(models.Model):
     notes = fields.Text(string='Notes')
     full_detail = fields.Char(string="Full Detail", compute="_compute_full_detail")
     image = fields.Binary(string='Photo')
+    state = fields.Selection([
+        ('draft', 'Draft'),
+        ('confirmed', 'Confirmed'),
+        ('alumni', 'Alumni'),
+    ], string="Status", default='draft', tracking=True,readonly=True)
     
     subject_line_ids = fields.One2many('student.subject.line', 'student_id', string="Subjects & Marks")
     class_id = fields.Many2one('school.class', string="Class")
-    user_id = fields.Many2one('res.users', string='Related User',
-                              help="Link the student record to a login user (used for record rules).")
+#     user_id = fields.Many2one(
+#     'res.users',
+#     string='Related User',
+#     help="Link student record to a specific Odoo user"
+# )
+    user_id = fields.Many2one('res.users', string="Related User", ondelete="cascade")
+
     _sql_constraints = [
         ('roll_no', 'unique(roll_no)', 'Roll Number must be unique!'),
         ]
@@ -34,6 +49,19 @@ class Student(models.Model):
     # @api.model
     # def create_default_student(self):
     #    return self.create({'name':'Iron man','email':'ironmana123@gmail.com'})
+    
+    def action_confirm(self):
+        for rec in self:
+            rec.state = 'confirmed'
+
+    def action_alumni(self):
+        for rec in self:
+            rec.state = 'alumni'
+
+    def action_reset_draft(self):
+        for rec in self:
+            rec.state = 'draft'
+    
     
     @api.constrains('image')
     def check_image(self):
@@ -61,6 +89,39 @@ class Student(models.Model):
         for rec in self:
             rec.age = self._calculate_age(rec.dob)
 
+    @api.model
+    def create(self, vals):
+         student = super(Student, self).create(vals)
+         
+         
+         student.message_post(
+             body="Student Has Created successfully"
+             #there are other type also :- like message_type,subject
+             
+         )
+        
+         if not student.user_id:
+             if not student.email:
+                 raise UserError(("Please enter an email for the student to create a login."))
+    
+             group_student = self.env.ref('student_management.group_student_user', raise_if_not_found=False)
+             group_internal = self.env.ref('base.group_user', raise_if_not_found=False)
+        
+            
+             user_vals = {
+                 'name': student.name,
+                 'login': student.email.lower(),
+                 'email': student.email.lower(),
+                 'password': '1234',
+                 'active': True,
+                 'groups_id': [(6, 0, [group_internal.id, group_student.id])],
+             }
+             new_user = self.env['res.users'].sudo().create(user_vals)
+             student.user_id = new_user.id
+        
+         return student
+
+    
     # @api.model
     # def create(self, vals):
     #     if 'dob' in vals and self._calculate_age(vals['dob']) < 18:
@@ -80,11 +141,11 @@ class Student(models.Model):
     #                 raise UserError("You cannot set age less than 18!")
     #     return super().write(vals) 
         
-    def unlink(self):
-        for rec in self:
-            if rec.is_active:
-                raise UserError("Cannot delete an active student!")
-        return super().unlink()
+    # def unlink(self):
+    #     for rec in self:
+    #         if rec.is_active:
+    #             raise UserError("Cannot delete an active student!")
+    #     return super().unlink()
       
 class Schoolsubject(models.Model):
     _name='school.subject'
@@ -98,7 +159,8 @@ class Schoolsubject(models.Model):
 class SchoolClass(models.Model):
     _name = 'school.class'
     _description = "School Classes"
-
+    
+  
     name = fields.Char(string="Class Name", required=True)
     class_teacher = fields.Char(string="Class Teacher")
     section = fields.Selection([

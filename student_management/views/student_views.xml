@@ -1,6 +1,6 @@
 <odoo>
     <record id="view_student_list" model="ir.ui.view">
-        <field name="name">student.list</field>
+        <field name="name">student.list</field>```
         <field name="model">student.student</field>
         <field name="arch" type="xml">
             <list>
@@ -21,6 +21,18 @@
         <field name="model">student.student</field>
         <field name="arch" type="xml">
             <form string="Student">
+
+    <header>
+         <button name="action_reset_draft" string="Reset to Draft"
+                type="object"/>
+        <button name="action_confirm" string="Confirm"
+                type="object"/>
+        <button name="action_alumni" string="Mark Alumni"
+                type="object"/>             
+        <field name="state" widget="statusbar"
+           statusbar_visible="draft,confirmed,alumni"/> 
+           
+</header>
                 <sheet>
                     <group>
                         <field name="image" widget="image" class="oe_avatar" nolabel="1"
@@ -40,7 +52,7 @@
                             <field name="admission_date"/>
                             <field name="is_active"/>
                             <field name="age"/>
-                            <field name="user_id" context="{'default_groups_id': [(6, 0, [])]}"/> 
+                            <!-- <field name="user_id" context="{'default_groups_id': [(6, 0, [])]}"/>  -->
                         </group>
                     </group>
 
@@ -58,20 +70,46 @@
                         </page>
 
                        <page string="Subjects">
-                    <field name="subject_line_ids">
-                         <list editable="bottom">
-                             <field name="subject_id"/>
-                             <field name="subject_code"/>
-                             <field name="marks"/>
-                             <field name="grade"/>
-                         </list>
-                     </field>
-                            
-                     <!-- this is something -->
-</page>
+        <field name="subject_line_ids"
+               groups="student_management.group_teacher_user,student_management.group_student_admin">
+            <list editable="bottom">
+                <field name="subject_id"/>
+                <field name="subject_code"/>
+                <field name="marks"/>
+                <field name="grade"/>
+            </list> `
+        </field>
+
+        <field name="subject_line_ids"
+               groups="student_management.group_student_user"
+               readonly="1">
+            <list>
+                <field name="subject_id"/>
+                <field name="subject_code"/>
+                <field name="marks"/>
+                <field name="grade"/>
+            </list>  
+        </field>
+    </page>
+
 
                     </notebook>
                 </sheet>
+<!--     
+        <div class="oe_chatter">
+        <field name="message_follower_ids" widget="mail_followers"/>
+        <field name="activity_ids" widget="mail_activity"/>
+        <field name="message_ids" widget="mail_thread"/>
+        </div>  -->
+        <!-- <chatter/> -->
+
+         <chatter>
+         <div class="oe_chatter">
+            <field name="message_follower_ids" widget="mail_followers"/>
+            <field name="activity_ids" widget="mail_activity"/>
+            <field name="message_ids" widget="mail_thread"/>
+         </div>
+         </chatter>
             </form>
         </field>
     </record>
@@ -113,10 +151,9 @@
      <label for="student_ids" string="Name:"/>
     <field name="student_ids" widget="many2many_tags" />
 </page>
-
-
         </notebook>
                 </sheet>
+               
             </form>
         </field>
     </record>
@@ -141,4 +178,31 @@
 </kanban> 
 </field> 
 </record>
+
+<record id="view_student_graph_gender" model="ir.ui.view">
+    <field name="name">student.student.graph.gender</field>
+    <field name="model">student.student</field>
+    <field name="arch" type="xml">
+        <graph string="Students by Gender" type="pie">
+             <field name="gender" type="row"/>  
+              <!-- this will odoo to thaat this is grouping filed --> 
+            <field name="id" type="measure"/>
+        </graph>
+    </field>
+</record>
+
+
+
+<record id="view_student_calendar" model="ir.ui.view">
+    <field name="name">student.student.calendar</field>
+    <field name="model">student.student</field>
+    <field name="arch" type="xml">
+        <calendar string="student birthdays" date_start="dob">
+            <field name="name"/>
+            <field name="gender"/>
+            <field name="class_id"/>
+        </calendar>
+    </field>
+</record>
+
 </odoo>
