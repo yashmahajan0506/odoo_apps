@@ -1,0 +1,35 @@
+<odoo>
+
+    <record id="action_server_test_message" model="ir.actions.server">
+        <field name="name">Test Server Action</field>
+        <field name="model_id" ref="model_student_student"/>
+        <field name="state">code</field>
+        <field name="code">
+            action = {
+                "type": "ir.actions.client",
+                "tag": "display_notification",
+                "params": {
+                    "title": "This is server action ",
+                    "message": "This server action ran successfully",
+                    "type": "success",
+                    "sticky": False,
+                },
+            }
+        </field>
+    </record>
+
+    <record id="view_student_form_inherit_test_server_action" model="ir.ui.view">
+        <field name="name">student.form.inherit.test.server.action</field>
+        <field name="model">student.student</field>
+        <field name="inherit_id" ref="student_management.view_student_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="%(action_server_test_message)d"
+                        string="Run Server Action"
+                        type="action"
+                        class="btn-primary"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

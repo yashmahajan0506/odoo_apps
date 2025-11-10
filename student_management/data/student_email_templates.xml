@@ -1,0 +1,15 @@
+<odoo>
+    <record id="email_template_student_birthday" model="mail.template">
+        <field name="name">Student Birthday Wishes</field>
+        <field name="model_id" ref="student_management.model_student_student"/>
+        <field name="subject">🎉 Happy Birthday, ${object.name}!</field>
+        <field name="email_from">${(user.email_formatted or '')|safe}</field>
+        <field name="email_to">${object.email}</field>
+        <field name="body_html"><![CDATA[
+            <p>Dear ${object.name},</p>
+            <p>🎂 Wishing you a very Happy Birthday! 🎉</p>
+            <p>May your day be filled with joy and success.</p>
+            <p>Best wishes,<br/>Your School Team</p>
+        ]]></field>
+    </record>
+</odoo>

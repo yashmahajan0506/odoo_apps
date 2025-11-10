@@ -1,0 +1,17 @@
+<!-- <odoo>
+    <record id="view_birthday_wizard" model="ir.ui.view">
+        <field name="name">birthday.wizard.form</field>
+        <field name="model">birthday.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Happy Birthday! ">
+                <group>
+                    <h2> Happy Birthday <t t-esc="student_name"/>! </h2>
+                    <p>Wishing you a wonderful day filled with joy!</p>
+                </group>
+                <footer>
+                    <button string="Thank You " class="btn-primary" type="object" name="action_ok"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo> -->

@@ -1,6 +1,7 @@
 <odoo>
+
     <record id="view_student_list" model="ir.ui.view">
-        <field name="name">student.list</field>```
+        <field name="name">student.list</field>
         <field name="model">student.student</field>
         <field name="arch" type="xml">
             <list>
@@ -22,17 +23,20 @@
         <field name="arch" type="xml">
             <form string="Student">
 
-    <header>
-         <button name="action_reset_draft" string="Reset to Draft"
-                type="object"/>
-        <button name="action_confirm" string="Confirm"
-                type="object"/>
-        <button name="action_alumni" string="Mark Alumni"
-                type="object"/>             
-        <field name="state" widget="statusbar"
-           statusbar_visible="draft,confirmed,alumni"/> 
-           
-</header>
+                <header>
+                     <button name="%(action_student_message_wizard)d"
+                           string="Send Message"
+                           type="action"
+                           class="btn-primary"/>
+                    <button name="action_send_mail_to_student" type="object" string="Send Mail to Student"
+                            class="btn-primary"
+                            groups="student_management.group_teacher_user,student_management.group_student_admin"/>
+                    <button name="action_send_mail_to_teacher" type="object" string="Send Mail to Teacher"
+                            class="btn-secondary"
+                            groups="student_management.group_student_user"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,alumni"/>
+                </header>
+
                 <sheet>
                     <group>
                         <field name="image" widget="image" class="oe_avatar" nolabel="1"
@@ -52,12 +56,14 @@
                             <field name="admission_date"/>
                             <field name="is_active"/>
                             <field name="age"/>
-                            <!-- <field name="user_id" context="{'default_groups_id': [(6, 0, [])]}"/>  -->
+                            <!-- <field name="user_id" context="{'default_groups_id': [(6, 0, [])]}"/> -->
                         </group>
                     </group>
 
                     <group>
                         <field name="class_id"/>
+                        <!-- recently added -->
+                        <field name="class_teaher_name" readonly="1"/>
                     </group>
 
                     <notebook>
@@ -69,47 +75,39 @@
                             <field name="full_detail" readonly="1"/>
                         </page>
 
-                       <page string="Subjects">
-        <field name="subject_line_ids"
-               groups="student_management.group_teacher_user,student_management.group_student_admin">
-            <list editable="bottom">
-                <field name="subject_id"/>
-                <field name="subject_code"/>
-                <field name="marks"/>
-                <field name="grade"/>
-            </list> `
-        </field>
+                        <page string="Subjects">
+                            <field name="subject_line_ids"
+                                   groups="student_management.group_teacher_user,student_management.group_student_admin">
+                                <list editable="bottom">
+                                    <field name="subject_id"/>
+                                    <field name="subject_code"/>
+                                    <field name="marks"/>
+                                    <field name="grade"/>
+                                </list>
+                            </field>
 
-        <field name="subject_line_ids"
-               groups="student_management.group_student_user"
-               readonly="1">
-            <list>
-                <field name="subject_id"/>
-                <field name="subject_code"/>
-                <field name="marks"/>
-                <field name="grade"/>
-            </list>  
-        </field>
-    </page>
-
-
+                            <field name="subject_line_ids"
+                                   groups="student_management.group_student_user"
+                                   readonly="1">
+                                <list>
+                                    <field name="subject_id"/>
+                                    <field name="subject_code"/>
+                                    <field name="marks"/>
+                                    <field name="grade"/>
+                                </list>
+                            </field>
+                        </page>
                     </notebook>
                 </sheet>
-<!--     
-        <div class="oe_chatter">
-        <field name="message_follower_ids" widget="mail_followers"/>
-        <field name="activity_ids" widget="mail_activity"/>
-        <field name="message_ids" widget="mail_thread"/>
-        </div>  -->
-        <!-- <chatter/> -->
 
-         <chatter>
-         <div class="oe_chatter">
-            <field name="message_follower_ids" widget="mail_followers"/>
-            <field name="activity_ids" widget="mail_activity"/>
-            <field name="message_ids" widget="mail_thread"/>
-         </div>
-         </chatter>
+                <chatter>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </chatter>
+
             </form>
         </field>
     </record>
@@ -126,6 +124,7 @@
         </field>
     </record>
 
+
     <record id="view_class_form" model="ir.ui.view">
         <field name="name">school.class.form</field>
         <field name="model">school.class</field>
@@ -137,72 +136,93 @@
                         <field name="section"/>
                         <field name="class_teacher"/>
                     </group>
-        <notebook>
 
-             <!-- <page string="Students">
-                <field name="student_ids"> 
-                    <list>
-                    <field name="name"/>
-                    </list>
-                </field>
-            </page>  -->
-         
-<page string="Students">
-     <label for="student_ids" string="Name:"/>
-    <field name="student_ids" widget="many2many_tags" />
-</page>
-        </notebook>
+                    <notebook>
+                        <page string="Students">
+                            <label for="student_ids" string="Name:"/>
+                            <field name="student_ids" widget="many2many_tags"/>
+                        </page>
+                    </notebook>
                 </sheet>
-               
             </form>
         </field>
     </record>
 
-    <record id="view_student_kanban" model="ir.ui.view"> 
-        <field name="name">student.kanban</field> <field name="model">student.student</field> 
-        <field name="arch" type="xml"> 
-            <kanban default_group_by="gender" class="o_kanban_view student_kanban"> 
-                <templates> 
-                    <t t-name="kanban-box"> <div class="oe_kanban_global_click o_kanban_record student_card" style="display: flex; flex-direction: row; padding: 10px; width: 300px; margin: 5px; border: 1px solid #ddd; border-radius: 6px; background-color: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.1);"> <main style="flex: 1; font-size: 13px; line-height: 1.3;">
-                         <strong style="font-size: 14px; display: block; margin-bottom: 5px;"><field name="name"/>
-                        </strong> 
-                        <div>Roll No: <field name="roll_no"/>
-                        </div> 
-                        <div>DOB: <field name="dob"/></div> 
-                        <div>Gender: <field name="gender"/>
-                        </div> <div>Admission: <field name="admission_date"/></div> <div>Age: <field name="age"/></div> </main> <aside style="margin-left: 10px; flex-shrink: 0; display: flex; align-items: flex-start;"> 
-            <img t-att-src="kanban_image('student.student', 'image', record.id.value)" class="img" alt="Student Image" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px;"/> </aside> 
-        </div> 
-    </t> 
-</templates> 
-</kanban> 
-</field> 
-</record>
 
-<record id="view_student_graph_gender" model="ir.ui.view">
-    <field name="name">student.student.graph.gender</field>
-    <field name="model">student.student</field>
-    <field name="arch" type="xml">
-        <graph string="Students by Gender" type="pie">
-             <field name="gender" type="row"/>  
-              <!-- this will odoo to thaat this is grouping filed --> 
-            <field name="id" type="measure"/>
-        </graph>
-    </field>
-</record>
+    <record id="view_student_kanban" model="ir.ui.view">
+        <field name="name">student.kanban</field>
+        <field name="model">student.student</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="gender" class="o_kanban_view student_kanban">
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record student_card"
+                             style="display: flex; flex-direction: row; padding: 10px; width: 300px; margin: 5px;
+                                    border: 1px solid #ddd; border-radius: 6px; background-color: #fff;
+                                    box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                            <main style="flex: 1; font-size: 13px; line-height: 1.3;">
+                                <strong style="font-size: 14px; display: block; margin-bottom: 5px;">
+                                    <field name="name"/>
+                                </strong>
+                                <div>Roll No: <field name="roll_no"/></div>
+                                <div>DOB: <field name="dob"/></div>
+                                <div>Gender: <field name="gender"/></div>
+                                <div>Admission: <field name="admission_date"/></div>
+                                <div>Age: <field name="age"/></div>
+                            </main>
+                            <aside style="margin-left: 10px; flex-shrink: 0; display: flex; align-items: flex-start;">
+                                <img t-att-src="kanban_image('student.student', 'image', record.id.value)"
+                                     class="img" alt="Student Image"
+                                     style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px;"/>
+                            </aside>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
 
 
+    <record id="view_student_graph_gender" model="ir.ui.view">
+        <field name="name">student.student.graph.gender</field>
+        <field name="model">student.student</field>
+        <field name="arch" type="xml">
+            <graph string="Students by Gender" type="pie">
+                <field name="gender" type="row"/>
+              
+                <field name="id" type="measure"/>
+            </graph>
+        </field>
+    </record>
 
-<record id="view_student_calendar" model="ir.ui.view">
-    <field name="name">student.student.calendar</field>
-    <field name="model">student.student</field>
-    <field name="arch" type="xml">
-        <calendar string="student birthdays" date_start="dob">
-            <field name="name"/>
-            <field name="gender"/>
-            <field name="class_id"/>
-        </calendar>
-    </field>
+    <record id="view_student_calendar" model="ir.ui.view">
+        <field name="name">student.student.calendar</field>
+        <field name="model">student.student</field>
+        <field name="arch" type="xml">
+            <calendar string="Student Birthdays" date_start="dob">
+                <field name="name"/>
+                <field name="gender"/>
+                <field name="class_id"/>
+            </calendar>
+        </field>
+    </record>
+    
+    <record id="view_student_pivot" model="ir.ui.view">
+        <field name="name">student.student.pivot</field>
+        <field name="model">student.student</field>
+        <field name="arch" type="xml">
+            <pivot string="Student Info" sample="1">
+                <field name="name" type="row"/>
+                <field name="age" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+       <record id="action_student_message_wizard" model="ir.actions.act_window">
+    <field name="name">Send Message Wizard</field>
+    <field name="res_model">student.message.wizard</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
 </record>
 
 </odoo>

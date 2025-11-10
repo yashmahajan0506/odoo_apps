@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_invoice_document_inherit_staticdata" inherit_id="account.report_invoice_document">
+      <xpath expr="//div[@class='row']" position="inside"> 
+            <div>
+                <strong>Delivery Date:</strong>
+                <span t-field="o.delivery_date"/><br/>
+
+                <strong>Customer Reference:</strong>
+                <span t-field="o.customer_ref"/><br/>
+
+                <strong>Payment Status:</strong>
+                <span t-field="o.payment_status"/>
+            </div>
+        </xpath>
+    </template>
+</odoo>

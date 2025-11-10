@@ -1,0 +1,13 @@
+<odoo>
+    <record id="ir_cron_student_birthday_email" model="ir.cron">
+        <field name="name">Send Birthday Emails to Students</field>
+        <field name="model_id" ref="student_management.model_student_student"/>
+        <field name="state">code</field>
+        <field name="code">model.action_send_birthday_emails()</field>
+        <field name="active">True</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="nextcall">2025-11-08 00:00:00</field>
+    </record>
+</odoo>
