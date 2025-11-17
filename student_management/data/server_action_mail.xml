@@ -1,0 +1,16 @@
+<record id="action_server_test_message" model="ir.actions.server">
+    <field name="name">Test Server Action</field>
+    <field name="model_id" ref="model_student_student"/>
+    <field name="state">code</field>
+    <field name="code">
+        action = {
+            "type": "ir.actions.client",
+            "tag": "display_notification",
+            "params": {
+                "title": "Hello 👋",
+                "message": "Your server action executed successfully!",
+                "type": "success",
+            },
+        }
+    </field>
+</record>

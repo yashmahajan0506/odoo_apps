@@ -1,0 +1,26 @@
+
+<odoo>
+
+    <!-- Teacher to Student Mail Template -->
+    <record id="email_template_teacher_to_student" model="mail.template">
+        <field name="name">Teacher to Student Mail</field>
+        <field name="model_id" ref="student_management.model_student_student"/>
+        <field name="subject">Message from Teacher: {{object.name}}</field>
+        <field name="subject">Roll No:{{object.roll_no}}</field>
+        <field name="email_from">${user.email or ''}</field>
+        <field name="email_to">${object.email or ''}</field>
+        <field name="body_html" type="html">
+             <span>Hello <t t-esc="object.name"/></span>
+     
+            <p>This is a message from your teacher.</p>
+            <p>Here are your details:</p>
+            <span>Roll No:<t t-esc="object.roll_no"/></span><br></br>
+            <span>Email:<t t-esc="object.email"/></span><br></br>
+           
+            <span>Best regards,</span><br></br>
+            <span>Hello <t t-esc="user.name"/></span>
+          
+        </field>
+    </record>
+
+</odoo>

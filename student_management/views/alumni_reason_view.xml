@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_alumni_reason_list" model="ir.ui.view">
+        <field name="name">student.alumni.reason.list</field>
+        <field name="model">student.alumni.reason</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="student_id"/>
+                <field name="name"/>
+                <field name="date"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_alumni_reason_form" model="ir.ui.view">
+        <field name="name">student.alumni.reason.form</field>
+        <field name="model">student.alumni.reason</field>
+        <field name="arch" type="xml">
+            <form string="Alumni Reason">
+                <sheet>
+                    <group>
+                        <field name="student_id"/>
+                        <field name="name"/>
+                        <field name="date"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

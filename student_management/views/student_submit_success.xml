@@ -1,0 +1,16 @@
+<odoo>
+    <template id="student_submit_success" name="Student Application Success Page">
+        <t t-call="website.layout">
+            <div class="container mt-5">
+                <h2>Application Submitted Successfully!</h2>
+                <p><strong>Roll No: </strong> <t t-esc="student.roll_no"/></p>
+                <p><strong>Name:</strong> <t t-esc="student.name"/></p>
+                <p><strong>Email:</strong> <t t-esc="student.email"/></p>
+                <p><strong>Phone:</strong> <t t-esc="student.phone"/></p>
+                <p><strong>Age:</strong> <t t-esc="student.age"/></p>
+
+                <a href="/student/application" class="btn btn-secondary mt-3">Submit Another</a>
+            </div>
+        </t>
+    </template>
+</odoo>

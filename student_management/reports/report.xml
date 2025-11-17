@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<report
+    id="action_student_report"
+    string="Student Report"
+    model="student.student"
+    report_type="qweb-pdf"
+    name="student_management.student_report_pdf"
+    file="student_management.student_report_pdf"
+    print_report_name="'Student_Report_%s' % (object.name)"
+/>
+
+    
+
+</odoo>

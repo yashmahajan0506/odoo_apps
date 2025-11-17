@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inherit the default Sale Order report -->
+    <template id="report_saleorder_document_inherit_fields" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//div[@class='page']" position="inside">
+
+
+            <div>
+
+            
+                   
+                        <strong>Delivery Date:</strong>
+                        <span t-field="doc.delivery_date"/>
+              
+                   
+                        <strong>Customer Reference:</strong>
+                        <span t-field="doc.customer_ref"/>
+            
+                   
+                        <strong>Payment Status:</strong>
+                        <span t-field="doc.payment_status"/>
+                
+            </div>
+            <div>
+                <strong>Thank you for choosing ABC Company!</strong><br/>
+                <span>Please make payment within 7 days of invoice date.</span><br/>
+                <span>For support, contact: support@abccompany.com</span>
+            </div>
+
+        </xpath>
+    </template>
+</odoo>
