@@ -1,0 +1,12 @@
+<odoo>
+    <template id="job_apply_success" name="Job Apply Success">
+        <t t-call="website.layout">
+            <div class="container mt-5 text-center">
+                <h2>Application Submitted Successfully!</h2>
+                <p>Thank you for applying. We will contact you soon.</p>
+
+                <a href="/jobs" class="btn btn-secondary mt-3">Back to Job List</a>
+            </div>
+        </t>
+    </template>
+</odoo>

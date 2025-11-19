@@ -1,0 +1,20 @@
+<!-- <?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="server_action_shortlist_email" model="ir.actions.server">
+        <field name="name">Show Shortlist Email Info</field>
+        <field name="model_id" ref="model_my_job_portal_job_application"/>
+        <field name="state">code</field>
+
+        <field name="code">
+action = {
+    "type": "ir.actions.act_window",
+    "res_model": "mail.template",
+    "view_mode": "form",
+    "res_id": env.ref("my_job_portal.mail_template_job_application_shortlisted").id,
+    "target": "new",
+}
+        </field>
+    </record>
+
+</odoo> -->

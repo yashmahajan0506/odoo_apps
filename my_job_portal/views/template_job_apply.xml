@@ -1,0 +1,43 @@
+<odoo>
+    <template id="job_apply_template" name="Job Apply Form">
+        <t t-call="website.layout">
+            <div class="container mt-4">
+
+                <h2>Apply for: <t t-esc="job.name"/></h2>
+
+                <form action="/jobs/apply/submit" method="post" enctype="multipart/form-data">
+
+    <!-- CSRF token is required -->
+    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+    <input type="hidden" name="job_id" t-att-value="job.id"/>
+
+    <div class="mb-3">
+        <label>Name</label>
+        <input type="text" name="name" class="form-control" required="required"/>
+    </div>
+
+    <div class="mb-3">
+        <label>Email</label>
+        <input type="email" name="email" class="form-control" required="required"/>
+    </div>
+
+    <div class="mb-3">
+        <label>Phone</label>
+        <input type="text" name="phone" class="form-control"/>
+    </div>
+
+    <div class="mb-3">
+        <label>Upload CV</label>
+        <input type="file" name="cv" class="form-control"/>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit Application</button>
+
+</form>
+
+
+            </div>
+        </t>
+    </template>
+</odoo>

@@ -17,13 +17,6 @@
             <field name="domain_force">[(1, '=', 1)]</field>
         </record>
 
-<!--       
-     <record id="admin_subject_line_rule" model="ir.rule">
-        <field name="name">Admin: Can see all subject lines</field>
-        <field name="model_id" ref="model_student_subject_line"/>
-        <field name="groups" eval="[(4, ref('student_management.group_student_admin'))]"/>
-        <field name="domain_force">[(1, '=', 1)]</field>
-    </record> -->
 
     </data>
 </odoo>

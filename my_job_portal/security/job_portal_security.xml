@@ -1,0 +1,12 @@
+<!-- <odoo>
+
+<record id="rule_job_application_hr_only" model="ir.rule">
+<field name="name">Job Application - HR only</field>
+<field name="model_id" ref="model_job_portal_job_application"/>
+<field name="groups" eval="[(4, ref('hr.group_hr_manager'))]"/>
+<field name="perm_read" eval="True"/>
+<field name="perm_write" eval="True"/>
+<field name="perm_unlink" eval="True"/>
+<field name="perm_create" eval="True"/>
+</record>
+</odoo> -->
