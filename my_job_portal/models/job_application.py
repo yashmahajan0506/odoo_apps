@@ -96,6 +96,13 @@ class JobApplication(models.Model):
                 else:
                     self.email_domain = False
             
-            
-    # @api.depends()
-    # def application_num_count():
+              
+            def test_browse_method(self):
+               application = self.env['my_job_portal.job.application'].browse(1)
+
+               if application.exists():
+                        print("Applicant:", application.applicant_name)
+               else:
+                        print("Record does not exist")
+
+   

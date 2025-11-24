@@ -12,3 +12,4 @@ class JobPosition(models.Model):
     department_id = fields.Many2one('hr.department', string='Department')
     total_openings = fields.Integer(string='Total Openings', default=1)
     active = fields.Boolean(string='Active', default=True)
+ 

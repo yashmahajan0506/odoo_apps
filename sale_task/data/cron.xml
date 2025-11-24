@@ -1,0 +1,12 @@
+<odoo>
+    <record id="ir_cron_auto_approve_sale_order" model="ir.cron">
+        <field name="name">Auto Approve Sale Orders of 3 days </field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="state">code</field>
+        <field name="code">model.cron_auto_approve_orders()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <!-- <field name="numbercall">-1</field> -->
+        <field name="active">True</field>
+    </record>
+</odoo>

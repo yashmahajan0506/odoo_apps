@@ -38,7 +38,7 @@
                             class="btn-primary"/> -->
                 </header>
 
-                 
+          
                 <button name="action_send_report_mail"
                         type="object"
                         class="btn-primary"
@@ -148,6 +148,9 @@
         <field name="model">student.subject.line</field>
         <field name="arch" type="xml">
             <form string="Subject Detail">
+                                       <!-- <button name="action_add_sub" type="object" string="add subject"
+                            class="btn-primary"
+                            /> -->
                 <sheet>
                     <group>
                         <field name="student_id" invisible="1"/>

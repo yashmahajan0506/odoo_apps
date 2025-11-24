@@ -5,8 +5,6 @@ import base64
 
 
 class WebsiteJobs(http.Controller):
-
-
         @http.route(['/jobs'], type='http', auth="public", website=True)
         def job_list(self, **kw):
             jobs = request.env['my_job_portal.job.position'].sudo().search([('active', '=', True)])

@@ -6,6 +6,8 @@
         <field name="model">my_job_portal.job.application</field>
         <field name="arch" type="xml">
             <form string="Job Application">
+                 <button name="test_browse_metho" string="click me"
+        />
                 <header>
                     <button name="action_shortlist" type="object" string="Shortlist"
                             class="btn-primary"/>

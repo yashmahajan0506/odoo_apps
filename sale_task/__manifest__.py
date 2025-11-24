@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "training student",
+    'name': "sale_task",
 
     'summary': "Short (1 phrase/line) summary of the module's purpose",
 
@@ -18,20 +18,29 @@ Long description of module's purpose
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    'depends': ['base','sale'],
 
     # always loaded
     'data': [
-        'security/ir.model.access.csv',
-        'views/student_views.xml',
-        'views/menu_student.xml',
-        'views/teacher_views.xml',
-        'security/security.xml',
+        # 'security/ir.model.access.csv',
+        'views/views.xml',
+        'views/templates.xml',
+        'data/cron.xml',
+        'data/mail_template_for_approved.xml',
+        'data/server_action_mail.xml',
+        'data/mail_template_for_confirmation.xml',
+         'views/sale_order_menu.xml',
+        
+        
     ],
-    # only loaded in demonstration mode
+    
+    'installable':True,
+    'application': True,
+    'auto_install': False,
+
+ 
     'demo': [
         'demo/demo.xml',
     ],
-    'application':True,
 }
 

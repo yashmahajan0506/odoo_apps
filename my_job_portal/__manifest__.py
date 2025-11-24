@@ -26,7 +26,6 @@ Long description of module's purpose
         'security/ir.model.access.csv',
         'security/record_rules.xml',
         'data/mail_template.xml',
-        # 'data/server_action.xml',
         'views/menu.xml',
         'views/job_application_views.xml',
         'views/job_position_views.xml',

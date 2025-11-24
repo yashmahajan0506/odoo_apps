@@ -15,6 +15,7 @@ class Student(models.Model):
     gender = fields.Selection([
         ('male', 'Male'),
         ('female', 'Female'),
+        
         ('other', 'Other')
     ], string='Gender')
     email = fields.Char(string='Email')
@@ -274,6 +275,18 @@ class StudentSubjectLine(models.Model):
                 rec.grade = "D"
             else:
                 rec.grade = "F"
+    
+    
+    
 
+    #all onetomany commands:-  
+    
+    #(0,0) : -  this is use for creating record :-  
+    def action_add_sub(self):
+            self.write({'subject_line_ids':[
+                    (0,0,{
+                        'subject_id':1,
+                        'marks':89,
 
-
+                    })
+            ]})

@@ -1,32 +1,35 @@
 <odoo>
 
-    <record id="job_application_own_read" model="ir.rule">
-    <field name="name">Job application User Read</field>
-    <field name="model_id" ref="model_my_job_portal_job_application"/>
-    <field name="groups" eval="[(4, ref('my_job_portal.group_job_user'))]"/>
-    <field name="perm_read" eval="1"/>
-    <field name="perm_write" eval="0"/>
-    <field name="perm_create" eval="0"/>
-    <field name="perm_unlink" eval="0"/>
-    </record>
-
     <record id="job_position_user_read" model="ir.rule">
-    <field name="name">Job Position User Read</field>
-    <field name="model_id" ref="model_my_job_portal_job_position"/>
-    <field name="groups" eval="[(4, ref('my_job_portal.group_job_user'))]"/>
-    <field name="domain_force">[('active', '=', True)]</field>
-    <field name="perm_read" eval="1"/>
-    <field name="perm_write" eval="0"/>
-    <field name="perm_create" eval="0"/>
-    <field name="perm_unlink" eval="0"/>
+        <field name="name">Job Position User Read</field>
+        <field name="model_id" ref="model_my_job_portal_job_position"/>
+        <field name="groups" eval="[(4, ref('my_job_portal.group_job_user'))]"/>
+        <field name="domain_force">[('active', '=', True)]</field>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="0"/>
+        <field name="perm_create" eval="0"/>
+        <field name="perm_unlink" eval="0"/>
     </record>
 
+
+    <record id="job_application_user_read_own" model="ir.rule">
+        <field name="name">Job Application User Read Own</field>
+        <field name="model_id" ref="model_my_job_portal_job_application"/>
+        <field name="groups" eval="[(4, ref('my_job_portal.group_job_user'))]"/>
+        <field name="domain_force">[('create_uid', '=', user.id)]</field>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="0"/>
+        <field name="perm_create" eval="0"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
 
     <record id="job_position_hr_full_access" model="ir.rule">
-    <field name="name">HR Manager Full Access</field>
-    <field name="model_id" ref="model_my_job_portal_job_position"/>
-    <field name="groups" eval="[(4, ref('my_job_portal.group_job_hr_manager'))]"/>
-    <field name="domain_force">[(1,'=',1)]</field>
-</record>
+        <field name="name">HR Manager Full Access Position</field>
+        <field name="model_id" ref="model_my_job_portal_job_position"/>
+        <field name="groups" eval="[(4, ref('my_job_portal.group_job_hr_manager'))]"/>
+        <field name="domain_force">[(1,'=',1)]</field>
+    </record>
+
+    
 
 </odoo>

@@ -19,6 +19,7 @@
     <field name="model">my_job_portal.job.position</field>
     <field name="arch" type="xml">
     <form>
+       
         <sheet>
             <group>
                 <field name="name"/>
