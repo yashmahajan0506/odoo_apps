@@ -105,7 +105,7 @@ class Student(models.Model):
                 'type': 'ir.actions.act_window',
                 'name': 'All Subjects',
                 'res_model': 'student.subject.line',
-                'view_mode': 'tree,form',
+                'view_mode': 'list,form',
                 'domain': domain,
                 'context': {'default_student_id': self.id},
                 'target': 'current',
@@ -167,7 +167,7 @@ class Student(models.Model):
     def create(self, vals):
         student = super(Student, self).create(vals)
         student.message_post(body="Student has been created successfully")
-        # create res.user if not provided
+   
         if not student.user_id:
             if not student.email:
                 raise UserError("Please enter an email for the student to create a login.")
@@ -275,9 +275,6 @@ class StudentSubjectLine(models.Model):
                 rec.grade = "D"
             else:
                 rec.grade = "F"
-    
-    
-    
 
     #all onetomany commands:-  
     
@@ -290,3 +287,4 @@ class StudentSubjectLine(models.Model):
 
                     })
             ]})
+  

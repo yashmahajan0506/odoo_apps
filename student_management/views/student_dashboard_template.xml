@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="student_dashboard_templates" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <t t-name="student_management.StudentDashboardMain">
+                <div class="p-4">
+                    <h2>📊 Student Dashboard</h2>
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <div class="card card-body text-center">
+                                <h4>Total Students</h4>
+                                <h2><t t-esc="props.record.total_students"/></h2>
+                            </div>
+                        </div>
+                    </div>
+                    <canvas id="student_chart" height="120"></canvas>
+                </div>
+            </t>
+        </xpath>
+    </template>
+</odoo>

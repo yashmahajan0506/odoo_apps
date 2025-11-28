@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="website_page_student_info" model="website.page">
+        <field name="name">My Student Information</field>
+        <field name="type">qweb</field>
+        <field name="url">/my/student</field>
+        <field name="website_published">True</field>
+        <field name="visibility">public</field>
+        <field name="arch" type="xml">
+            <t t-name="website_myaccount_student.student_info_simple">
+                <t t-call="website_myaccount_student.student_info_simple"/>
+            </t>
+        </field>
+    </record>
+</odoo>

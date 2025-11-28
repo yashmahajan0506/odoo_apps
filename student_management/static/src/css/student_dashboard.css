@@ -1,0 +1,50 @@
+.student-dashboard {
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.dashboard-header {
+    background: linear-gradient(120deg, #667eea, #764ba2);
+    color: white;
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+}
+
+.card-stat {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transition: transform 0.3s;
+}
+
+.card-stat:hover {
+    transform: translateY(-8px);
+}
+
+.grade-badge {
+    padding: 8px 16px;
+    border-radius: 50px;
+    color: white;
+    font-weight: bold;
+}
+
+.grade-A { background:#28a745; }
+.grade-B { background:#007bff; }
+.grade-C { background:#ffc107; color:#212529; }
+.grade-D { background:#fd7e14; }
+.grade-F { background:#dc3545; }
+
+.progress-container {
+    background: #e9ecef;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 25px;
+    transition: width 1.5s ease-in-out;
+}

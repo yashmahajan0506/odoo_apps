@@ -1,0 +1,70 @@
+<!-- <?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_my_student_template">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs" t-value="[('Student Information', '/my/student')]"/>
+
+            <div class="container mt-4">
+                <h2>Your Students</h2>
+
+                <t t-if="students">
+                    <ul>
+                        <t t-foreach="students" t-as="std">
+                            <li><t t-esc="std.name"/></li>
+                        </t>
+                    </ul>
+                </t>
+                <t t-else="">
+                    <p>No students found.</p>
+                </t>
+            </div>
+
+        </t>
+    </template>
+</odoo> -->
+
+
+ <odoo>
+    <template id="student_info_simple" name="My Student Info">
+        <t t-call="website.layout">
+            <div class="container py-4">
+
+                <h3 class="mb-3">My Student Information</h3>
+                <a href="/my/home" class="btn btn-secondary btn-sm mb-4">← Back to My Account</a>
+    
+                <t t-if="not students">
+                    <div class="alert alert-info text-center">
+                        No student information available.
+                    </div>
+                </t>
+
+                <t t-foreach="students" t-as="student">
+                    <div class="border rounded p-3 mb-3">
+
+                        <h5 class="mb-2">
+                            <t t-esc="student.name"/>
+                        </h5>
+
+                    
+                        <p class="mb-1"><strong>Age:</strong> <t t-esc="student.age"/></p>
+                        <p class="mb-1"><strong>Gender:</strong>
+                            <span t-if="student.gender == 'male'">Male</span>
+                            <span t-if="student.gender == 'female'">Female</span>
+                            <span t-if="student.gender == 'other'">Other</span>
+                            <span t-if="not student.gender">—</span>
+                        </p>
+
+                      
+                        <t t-if="student.image">
+                            <img t-att-src="image_data_uri(student.image)"
+                                 class="rounded mt-2"
+                                 style="width:60px; height:60px; object-fit:cover;"/>
+                        </t>
+
+                    </div>
+                </t>
+
+            </div>
+        </t>
+    </template>
+</odoo> 

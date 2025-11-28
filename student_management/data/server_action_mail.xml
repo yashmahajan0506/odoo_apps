@@ -7,7 +7,7 @@
             "type": "ir.actions.client",
             "tag": "display_notification",
             "params": {
-                "title": "Hello 👋",
+                "title": "Hello",
                 "message": "Your server action executed successfully!",
                 "type": "success",
             },

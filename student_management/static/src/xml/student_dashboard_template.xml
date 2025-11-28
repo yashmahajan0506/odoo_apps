@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <templates>
+        <t t-name="student_management.StudentDashboardMain">
+            <div class="p-4">
+                <h2 class="mb-3">📊 Student Dashboard</h2>
+
+                <div class="row">
+                    <div class="col-3 card p-3 m-2">
+                        <h4>Total Students</h4>
+                        <span t-esc="state.total_students"/>
+                    </div>
+
+                    <div class="col-3 card p-3 m-2">
+                        <h4>Active Students</h4>
+                        <span t-esc="state.active_students"/>
+                    </div>
+
+                    <div class="col-3 card p-3 m-2">
+                        <h4>Male</h4>
+                        <span t-esc="state.male_students"/>
+                    </div>
+
+                    <div class="col-3 card p-3 m-2">
+                        <h4>Female</h4>
+                        <span t-esc="state.female_students"/>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </templates>
