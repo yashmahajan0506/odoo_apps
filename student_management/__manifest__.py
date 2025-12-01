@@ -58,6 +58,7 @@
         'views/teachers_views.xml',
         'views/departments.xml',
         'views/subject_views.xml',
+        'views/student_dashboard_pdf_template.xml',
         'reports/report_student_template.xml',
         'reports/report.xml',
 

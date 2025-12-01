@@ -23,15 +23,18 @@
     </template>
 </odoo> -->
 
-
- <odoo>
+<odoo>
     <template id="student_info_simple" name="My Student Info">
         <t t-call="website.layout">
+
             <div class="container py-4">
 
-                <h3 class="mb-3">My Student Information</h3>
+                <h3 class="mb-3">
+                    <t t-esc="page_title"/>
+                </h3>
+
                 <a href="/my/home" class="btn btn-secondary btn-sm mb-4">← Back to My Account</a>
-    
+
                 <t t-if="not students">
                     <div class="alert alert-info text-center">
                         No student information available.
@@ -40,13 +43,10 @@
 
                 <t t-foreach="students" t-as="student">
                     <div class="border rounded p-3 mb-3">
+                        <h5 class="mb-2"><t t-esc="student.name"/></h5>
 
-                        <h5 class="mb-2">
-                            <t t-esc="student.name"/>
-                        </h5>
-
-                    
                         <p class="mb-1"><strong>Age:</strong> <t t-esc="student.age"/></p>
+
                         <p class="mb-1"><strong>Gender:</strong>
                             <span t-if="student.gender == 'male'">Male</span>
                             <span t-if="student.gender == 'female'">Female</span>
@@ -54,17 +54,16 @@
                             <span t-if="not student.gender">—</span>
                         </p>
 
-                      
                         <t t-if="student.image">
                             <img t-att-src="image_data_uri(student.image)"
                                  class="rounded mt-2"
                                  style="width:60px; height:60px; object-fit:cover;"/>
                         </t>
-
                     </div>
                 </t>
 
             </div>
+
         </t>
     </template>
-</odoo> 
+</odoo>

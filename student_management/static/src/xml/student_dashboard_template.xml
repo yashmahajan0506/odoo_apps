@@ -13,7 +13,41 @@
                 🎓 Student Analytics Dashboard
             </h2>
 
-            <!-- CARDS -->
+           
+            
+            
+    <div class="d-flex justify-content-between align-items-center mb-3">
+
+    <!-- LEFT BUTTONS -->
+    <div class="d-flex gap-2">
+        <button type="button" class="btn btn-secondary" t-on-click="addStudent">
+            ➕ Add Student
+        </button>
+    
+        <button type="button" class="btn btn-secondary" t-on-click="addDepartment">
+            ➕ Add Department
+        </button>
+    
+        <button type="button" class="btn btn-secondary" t-on-click="addSubject">
+            ➕ Add Subject
+        </button>
+    </div>
+
+    <!-- RIGHT BUTTON -->
+    <div>
+        <button class="btn btn-primary" t-on-click="downloadDashboardPDF">
+            📄 Download Dashboard
+        </button>
+    </div>
+
+</div>
+
+
+         <!-- <div class="d-flex justify-content-end mb-3">
+                 
+            </div> -->
+
+
             <div class="row g-4">
 
                 <div class="col-md-3">
@@ -23,6 +57,7 @@
                         <div class="value" t-esc="state.total_students"/>
                     </div>
                 </div>
+
 
                 <div class="col-md-3">
                     <div class="dash-card"
@@ -34,17 +69,17 @@
 
                 <div class="col-md-3">
                     <div class="dash-card"
-                         t-on-click="(ev) => this.openStudentList(ev, 'male')">
-                        <h5>Male</h5>
-                        <div class="value" t-esc="state.male_students"/>
+                         t-on-click="(ev) => this.openStudentList(ev, 'department')">
+                        <h5>Department</h5>
+                        <div class="value" t-esc="state.department_count"/>
                     </div>
                 </div>
 
                 <div class="col-md-3">
                     <div class="dash-card"
-                         t-on-click="(ev) => this.openStudentList(ev, 'female')">
-                        <h5>Female</h5>
-                        <div class="value" t-esc="state.female_students"/>
+                         t-on-click="(ev) => this.openStudentList(ev, 'subject')">
+                        <h5>Subjects</h5>
+                        <div class="value" t-esc="state.subject_count"/>
                     </div>
                 </div>
 

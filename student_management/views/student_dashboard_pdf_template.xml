@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="student_dashboard_simple_pdf" name="Student Dashboard Simple PDF">
+        <html>
+            <head>
+                <meta charset="utf-8"/>
+                <style>
+                    body { font-family: Arial, sans-serif; margin: 40px; }
+                    .header { background: #4e73df; color: white; padding: 20px; text-align: center; border-radius: 8px; }
+                    .card {
+                        display: inline-block; width: 22%; margin: 15px; padding: 25px;
+                        text-align: center; background: #f8f9fa; border-radius: 10px;
+                        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+                    }
+                    .value { font-size: 38px; font-weight: bold; margin: 10px 0; }
+                    .label { font-size: 16px; color: #555; }
+                    .footer { margin-top: 60px; text-align: center; color: #777; font-size: 14px; }
+                </style>
+            </head>
+            <body>
+                <div class="header">
+                    <h1>Student Analytics Dashboard</h1>
+                    </div>
+
+                <div style="text-align: center; margin-top: 40px;">
+                    <div class="card">
+                        <div class="value" style="color: #636e72;">
+                            <t t-esc="total_students"/>
+                        </div>
+                        <div class="label">Total Students</div>
+                    </div>
+
+                    <div class="card">
+                        <div class="value" style="color: #00b894;">
+                            <t t-esc="active_students"/>
+                        </div>
+                        <div class="label">Active Students</div>
+                    </div>
+
+                    <div class="card">
+                        <div class="value" style="color: #6a89ff;">
+                            <t t-esc="male_students"/>
+                        </div>
+                        <div class="label">Male Students</div>
+                    </div>
+
+                    <div class="card">
+                        <div class="value" style="color: #ff6fa8;">
+                            <t t-esc="female_students"/>
+                        </div>
+                        <div class="label">Female Students</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="value" style="color: #ff6fa8;">
+                            <t t-esc="department_count"/>
+                        </div>
+                        <div class="label">Department</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="value" style="color: #ff6fa8;">
+                            <t t-esc="subject_count"/>
+                        </div>
+                        <div class="label">Subject</div>
+                    </div>
+                </div>
+
+                <div class="footer">
+                    <p>Student Management System • Odoo 18</p>
+                </div>
+            </body>
+        </html>
+    </template>
+</odoo>

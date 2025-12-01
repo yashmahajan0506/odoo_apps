@@ -33,10 +33,8 @@ class Student(models.Model):
     assign_teacher=fields.Many2one('school.teacher',string="Assign Teacher",
         required=True)
 
-    # subject_line_ids = fields.One2many('student.subject.line', 'student_id', string="Subjects & Marks")
-    # class_id = fields.Many2one('school.class', string="Class")
+
     user_id = fields.Many2one('res.users', string="Related User", ondelete="cascade")
-    # class_teacher_name = fields.Char(related='class_id.class_teacher', string='Class Teacher', store=True)
 
     # _sql_constraints = [
     #     ('roll_no_uniq', 'unique(roll_no)', 'Roll Number must be unique!'),
@@ -79,6 +77,15 @@ class Student(models.Model):
          template.send_mail(self.id, force_send=True)
 
          return True
+    def action_open_student_form(self):
+        return {
+        'type': 'ir.actions.act_window',
+        'name': 'Student Details',
+        'res_model': 'student.student',
+        'view_mode': 'form',
+        'res_id': self.id,
+        'target': 'current',
+    }
 
     
     
@@ -226,29 +233,6 @@ class Student(models.Model):
                 'default_composition_mode': 'comment',
             },
         }
-
-
-# class Schoolsubject(models.Model):
-#     _name = 'school.subject'
-#     _description = "Subjects"
-
-#     name = fields.Char(string="Subject Name")
-#     code = fields.Char(string="Subject Code")
-
-
-# class SchoolClass(models.Model):
-#     _name = 'school.class'
-#     _description = "School Classes"
-
-#     name = fields.Char(string="Class Name")
-#     class_teacher = fields.Char(string="Class Teacher")
-#     section = fields.Selection([
-#         ('a', 'A'),
-#         ('b', 'B'),
-#         ('c', 'C'),
-#         ('d', 'D'),
-#     ], string="Section")
-#     student_ids = fields.One2many('student.student', 'class_id', string="Students")
 
 
 # class StudentSubjectLine(models.Model):
