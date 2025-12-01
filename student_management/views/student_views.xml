@@ -7,7 +7,7 @@
             <list>
                 <field name="name"/>
                 <field name="roll_no"/>
-                <field name="class_id"/>
+             
                 <field name="dob"/>
                 <field name="gender"/>
                 <field name="admission_date"/>
@@ -23,7 +23,7 @@
         <field name="arch" type="xml">
             <form string="Student">
                 <header>
-                    <button name="action_send_mail_to_student" type="object" string="Send Mail to Student"
+                    <!-- <button name="action_send_mail_to_student" type="object" string="Send Mail to Student"
                             class="btn-primary"
                             groups="student_management.group_teacher_user,student_management.group_student_admin"/>
                     <button name="action_send_mail_to_teacher" type="object" string="Send Mail to Teacher"
@@ -31,7 +31,7 @@
                             groups="student_management.group_student_user"/>
                     <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,alumni"/>
                     <button name="change_state_to_alumni" type="object" string="Alumni"
-                            class="btn-secondary"/>
+                            class="btn-secondary"/> -->
                     <!-- <button name="action_send_email_with_attachment"
                             type="object"
                             string="Send Mail"
@@ -39,13 +39,13 @@
                 </header>
 
           
-                <button name="action_send_report_mail"
+                <!-- <button name="action_send_report_mail"
                         type="object"
                         class="btn-primary"
-                        string="Send Report Mail"/>
+                        string="Send Report Mail"/> -->
 
                 <sheet>
-                    <div class="oe_button_box" name="button_box">
+                    <!-- <div class="oe_button_box" name="button_box">
                         <button
                             name="action_open_subject_lines"
                             type="object"
@@ -55,14 +55,25 @@
                             string="Subjects">
                             <field name="subject_count" widget="statinfo" string="Subjects"/>
                         </button>
-                    </div>
-
+                    </div> -->
+                <group>
+        <field name="image"
+               widget="image"
+               class="oe_avatar"
+               nolabel="1"
+    
+              />
+    </group>
+                
                     <group>
-                        <group>
+
+                <group>
                             <field name="name"/>
                             <field name="roll_no"/>
                             <field name="dob"/>
                             <field name="gender"/>
+                            <field name="assign_teacher"/>
+
                         </group>
                         <group>
                             <field name="email"/>
@@ -73,10 +84,10 @@
                         </group>
                     </group>
 
-                    <group>
+                    <!-- <group>
                         <field name="class_id"/>
                         <field name="class_teacher_name" readonly="1"/>
-                    </group>
+                    </group> -->
 
                     <notebook>
                         <page string="Notes">
@@ -86,7 +97,7 @@
                         <page string="Extra Info">
                             <field name="full_detail" readonly="1"/>
                         </page>
-
+<!-- 
                         <page string="Subjects">
                             <field name="subject_line_ids" groups="student_management.group_teacher_user,base.group_user">
                                 <list editable="bottom">
@@ -116,7 +127,8 @@
                                     <field name="grade"/>
                                 </list>
                             </field>
-                        </page>
+                        </page> -->
+
                     </notebook>
                 </sheet>
 
@@ -129,7 +141,7 @@
         </field>
     </record>
 
-    <record id="view_student_subject_line_list" model="ir.ui.view">
+    <!-- <record id="view_student_subject_line_list" model="ir.ui.view">
         <field name="name">student.subject.line.list</field>
         <field name="model">student.subject.line</field>
         <field name="arch" type="xml">
@@ -141,16 +153,14 @@
                 <field name="grade"/>
             </list>
         </field>
-    </record>
+    </record> -->
 
-    <record id="view_student_subject_line_form" model="ir.ui.view">
+    <!-- <record id="view_student_subject_line_form" model="ir.ui.view">
         <field name="name">student.subject.line.form</field>
         <field name="model">student.subject.line</field>
         <field name="arch" type="xml">
             <form string="Subject Detail">
-                                       <!-- <button name="action_add_sub" type="object" string="add subject"
-                            class="btn-primary"
-                            /> -->
+                                
                 <sheet>
                     <group>
                         <field name="student_id" invisible="1"/>
@@ -162,8 +172,8 @@
                 </sheet>
             </form>
         </field>
-    </record>
+    </record> -->
 
     <!-- other views can remain same (kanban, graph, calendar, pivot) -->
 
-<record id="view_student_kanban" model="ir.ui.view"> <field name="name">student.kanban</field> <field name="model">student.student</field> <field name="arch" type="xml"> <kanban default_group_by="gender" class="o_kanban_view student_kanban"> <templates> <t t-name="kanban-box"> <div class="oe_kanban_global_click o_kanban_record student_card" style="display: flex; flex-direction: row; padding: 10px; width: 300px; margin: 5px; border: 1px solid #ddd; border-radius: 6px; background-color: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.1);"> <main style="flex: 1; font-size: 13px; line-height: 1.3;"> <strong style="font-size: 14px; display: block; margin-bottom: 5px;"> <field name="name"/> </strong> <div>Roll No: <field name="roll_no"/></div> <div>DOB: <field name="dob"/></div> <div>Gender: <field name="gender"/></div> <div>Admission: <field name="admission_date"/></div> <div>Age: <field name="age"/></div> </main> <aside style="margin-left: 10px; flex-shrink: 0; display: flex; align-items: flex-start;"> <img t-att-src="kanban_image('student.student', 'image', record.id.value)" class="img" alt="Student Image" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px;"/> </aside> </div> </t> </templates> </kanban> </field> </record> <record id="view_student_graph_gender" model="ir.ui.view"> <field name="name">student.student.graph.gender</field> <field name="model">student.student</field> <field name="arch" type="xml"> <graph string="Students by Gender" type="pie"> <field name="gender" type="row"/> <field name="id" type="measure"/> </graph> </field> </record> <record id="view_student_calendar" model="ir.ui.view"> <field name="name">student.student.calendar</field> <field name="model">student.student</field> <field name="arch" type="xml"> <calendar string="Student Birthdays" date_start="dob"> <field name="name"/> <field name="gender"/> <field name="class_id"/> </calendar> </field> </record> <record id="view_student_pivot" model="ir.ui.view"> <field name="name">student.student.pivot</field> <field name="model">student.student</field> <field name="arch" type="xml"> <pivot string="Student Info" sample="1"> <field name="name" type="row"/> <field name="age" type="measure"/> </pivot> </field> </record> <record id="action_student_message_wizard" model="ir.actions.act_window"> <field name="name">Send Message Wizard</field> <field name="res_model">student.message.wizard</field> <field name="view_mode">form</field> <field name="target">new</field> </record> <!-- <record id="view_student_form_inherit_sendmail" model="ir.ui.view"> <field name="name">student.form.send.mail.button</field> <field name="model">student.student</field> <field name="inherit_id" ref="student_management.view_student_form"/> <field name="arch" type="xml"> <xpath expr="//form/header" position="inside"> </xpath> </field> </record> --> <!-- <record id="view_student_form_inherit_email" model="ir.ui.view"> <field name="name">student.form.email.button</field> <field name="model">student.student</field> <field name="inherit_id" ref="student_management.view_student_form"/> <field name="arch" type="xml"> <header position="inside"> <button name="action_send_fees_mail" type="object" string="Send Fees Mail" class="btn-primary" icon="fa-envelope"/> </header> </field> </record> --> </odoo>
+<record id="view_student_kanban" model="ir.ui.view"> <field name="name">student.kanban</field> <field name="model">student.student</field> <field name="arch" type="xml"> <kanban default_group_by="gender" class="o_kanban_view student_kanban"> <templates> <t t-name="kanban-box"> <div class="oe_kanban_global_click o_kanban_record student_card" style="display: flex; flex-direction: row; padding: 10px; width: 300px; margin: 5px; border: 1px solid #ddd; border-radius: 6px; background-color: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.1);"> <main style="flex: 1; font-size: 13px; line-height: 1.3;"> <strong style="font-size: 14px; display: block; margin-bottom: 5px;"> <field name="name"/> </strong> <div>Roll No: <field name="roll_no"/></div> <div>DOB: <field name="dob"/></div> <div>Gender: <field name="gender"/></div> <div>Admission: <field name="admission_date"/></div> <div>Age: <field name="age"/></div> </main> <aside style="margin-left: 10px; flex-shrink: 0; display: flex; align-items: flex-start;"> <img t-att-src="kanban_image('student.student', 'image', record.id.value)" class="img" alt="Student Image" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px;"/> </aside> </div> </t> </templates> </kanban> </field> </record> <record id="view_student_graph_gender" model="ir.ui.view"> <field name="name">student.student.graph.gender</field> <field name="model">student.student</field> <field name="arch" type="xml"> <graph string="Students by Gender" type="pie"> <field name="gender" type="row"/> <field name="id" type="measure"/> </graph> </field> </record> <record id="view_student_calendar" model="ir.ui.view"> <field name="name">student.student.calendar</field> <field name="model">student.student</field> <field name="arch" type="xml"> <calendar string="Student Birthdays" date_start="dob"> <field name="name"/> <field name="gender"/> </calendar> </field> </record> <record id="view_student_pivot" model="ir.ui.view"> <field name="name">student.student.pivot</field> <field name="model">student.student</field> <field name="arch" type="xml"> <pivot string="Student Info" sample="1"> <field name="name" type="row"/> <field name="age" type="measure"/> </pivot> </field> </record>  <!-- <record id="view_student_form_inherit_sendmail" model="ir.ui.view"> <field name="name">student.form.send.mail.button</field> <field name="model">student.student</field> <field name="inherit_id" ref="student_management.view_student_form"/> <field name="arch" type="xml"> <xpath expr="//form/header" position="inside"> </xpath> </field> </record> --> <!-- <record id="view_student_form_inherit_email" model="ir.ui.view"> <field name="name">student.form.email.button</field> <field name="model">student.student</field> <field name="inherit_id" ref="student_management.view_student_form"/> <field name="arch" type="xml"> <header position="inside"> <button name="action_send_fees_mail" type="object" string="Send Fees Mail" class="btn-primary" icon="fa-envelope"/> </header> </field> </record> --> </odoo>

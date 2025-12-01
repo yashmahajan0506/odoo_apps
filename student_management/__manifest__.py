@@ -17,6 +17,7 @@
                 "student_management/static/src/css/student_dashboard.css",
                 "student_management/static/src/css/student_kanban.css",
                 "student_management/static/src/css/student_style.css",
+                "student_management/static/src/css/dashboard.css",
         ],
     #     'web.assets_frontend': [
     #         'student_management/static/src/js/my_script.js',
@@ -38,33 +39,28 @@
     # always loaded
     'data': [
         'security/security.xml',
-        'security/record_rules.xml',
+        # 'security/record_rules.xml',
         'security/ir.model.access.csv',
         'data/cron.xml',
         'data/mail_template.xml',   
         'data/student_birthday_email_template.xml',
          # 'data/student_mail_template.xml',
         #  'data/website_page.xml',
-        'data/student_cron.xml',
+        'data/student_cron.xml',    
         'data/addmission_confirmation_mail_template.xml',
-        # 'views/assets.xml',9
         'views/student_views.xml',
-         'views/student_dashboard_view.xml',
         'views/menu.xml', 
-        'views/alumni_reason_view.xml',
+        'views/student_event_views.xml',
         'views/student_application_form.xml',
         'views/student_submit_success.xml',
         'views/portal_inherit.xml',
         'views/portal_student_template.xml',
-        # 'views/check_student_dashbord.xml',
-        # 'views/student_dashboard_template.xml',
-        # 'views/assests_backup.xml',
-        # 'views/template.xml',
+        'views/teachers_views.xml',
+        'views/departments.xml',
+        'views/subject_views.xml',
         'reports/report_student_template.xml',
         'reports/report.xml',
-        # 'wizards/student_wizard_views.xml',
-        # 'wizards/student_message_wizard_views.xml',
-        'wizards/alumni_wizard_view.xml',
+
         
         
            ],

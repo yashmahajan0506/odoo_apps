@@ -24,17 +24,19 @@ class Student(models.Model):
     is_active = fields.Boolean(string='Active Student', default=True)
     notes = fields.Text(string='Notes')
     full_detail = fields.Char(string="Full Detail", compute="_compute_full_detail", store=True)
-    image = fields.Binary(string='Photo')
+    image = fields.Binary()
     state = fields.Selection([
         ('draft', 'Draft'),
         ('confirmed', 'Confirmed'),
         ('alumni', 'Alumni'),
     ], string="Status", default='draft', tracking=True, readonly=True)
+    assign_teacher=fields.Many2one('school.teacher',string="Assign Teacher",
+        required=True)
 
-    subject_line_ids = fields.One2many('student.subject.line', 'student_id', string="Subjects & Marks")
-    class_id = fields.Many2one('school.class', string="Class")
+    # subject_line_ids = fields.One2many('student.subject.line', 'student_id', string="Subjects & Marks")
+    # class_id = fields.Many2one('school.class', string="Class")
     user_id = fields.Many2one('res.users', string="Related User", ondelete="cascade")
-    class_teacher_name = fields.Char(related='class_id.class_teacher', string='Class Teacher', store=True)
+    # class_teacher_name = fields.Char(related='class_id.class_teacher', string='Class Teacher', store=True)
 
     # _sql_constraints = [
     #     ('roll_no_uniq', 'unique(roll_no)', 'Roll Number must be unique!'),
@@ -82,34 +84,34 @@ class Student(models.Model):
     
     
     
-    @api.depends('subject_line_ids')
-    def _compute_subject_count(self):
-        for rec in self:
-            rec.subject_count = len(rec.subject_line_ids)
+    # @api.depends('subject_line_ids')
+    # def _compute_subject_count(self):
+    #     for rec in self:
+    #         rec.subject_count = len(rec.subject_line_ids)
 
-    def action_open_subject_lines(self):
-        self.ensure_one()
-        domain = [('student_id', '=', self.id)]
-        if self.subject_count == 1:
-            subject = self.env['student.subject.line'].search(domain, limit=1)
-            return {
-                'type': 'ir.actions.act_window',
-                'name': 'Subject Details',
-                'res_model': 'student.subject.line',
-                'view_mode': 'form',
-                'res_id': subject.id,
-                'target': 'current',
-            }
-        else:
-            return {
-                'type': 'ir.actions.act_window',
-                'name': 'All Subjects',
-                'res_model': 'student.subject.line',
-                'view_mode': 'list,form',
-                'domain': domain,
-                'context': {'default_student_id': self.id},
-                'target': 'current',
-            }
+    # def action_open_subject_lines(self):
+    #     self.ensure_one()
+    #     domain = [('student_id', '=', self.id)]
+    #     if self.subject_count == 1:
+    #         subject = self.env['student.subject.line'].search(domain, limit=1)
+    #         return {
+    #             'type': 'ir.actions.act_window',
+    #             'name': 'Subject Details',
+    #             'res_model': 'student.subject.line',
+    #             'view_mode': 'form',
+    #             'res_id': subject.id,
+    #             'target': 'current',
+    #         }
+    #     else:
+    #         return {
+    #             'type': 'ir.actions.act_window',
+    #             'name': 'All Subjects',
+    #             'res_model': 'student.subject.line',
+    #             'view_mode': 'list,form',
+    #             'domain': domain,
+    #             'context': {'default_student_id': self.id},
+    #             'target': 'current',
+    #         }
 
     def _cron_send_birthday_emails(self):
         today = date.today()
@@ -226,65 +228,65 @@ class Student(models.Model):
         }
 
 
-class Schoolsubject(models.Model):
-    _name = 'school.subject'
-    _description = "Subjects"
+# class Schoolsubject(models.Model):
+#     _name = 'school.subject'
+#     _description = "Subjects"
 
-    name = fields.Char(string="Subject Name")
-    code = fields.Char(string="Subject Code")
-
-
-class SchoolClass(models.Model):
-    _name = 'school.class'
-    _description = "School Classes"
-
-    name = fields.Char(string="Class Name")
-    class_teacher = fields.Char(string="Class Teacher")
-    section = fields.Selection([
-        ('a', 'A'),
-        ('b', 'B'),
-        ('c', 'C'),
-        ('d', 'D'),
-    ], string="Section")
-    student_ids = fields.One2many('student.student', 'class_id', string="Students")
+#     name = fields.Char(string="Subject Name")
+#     code = fields.Char(string="Subject Code")
 
 
-class StudentSubjectLine(models.Model):
-    _name = 'student.subject.line'
-    _description = 'Student Subject Marks'
+# class SchoolClass(models.Model):
+#     _name = 'school.class'
+#     _description = "School Classes"
 
-    student_id = fields.Many2one('student.student', string="Student", ondelete="cascade")
-    subject_id = fields.Many2one('school.subject', string="Subject", required=True)
-    subject_code = fields.Char(related='subject_id.code', string="Subject Code", store=True)
-    marks = fields.Float(string="Marks", default=0.0)
-    grade = fields.Char(string="Grade", compute='_compute_grade', store=True)
+#     name = fields.Char(string="Class Name")
+#     class_teacher = fields.Char(string="Class Teacher")
+#     section = fields.Selection([
+#         ('a', 'A'),
+#         ('b', 'B'),
+#         ('c', 'C'),
+#         ('d', 'D'),
+#     ], string="Section")
+#     student_ids = fields.One2many('student.student', 'class_id', string="Students")
 
-    @api.depends('marks')
-    def _compute_grade(self):
-        for rec in self:
-            m = rec.marks
-            if m is None:
-                rec.grade = False
-            elif m >= 90:
-                rec.grade = "A"
-            elif m >= 75:
-                rec.grade = "B"
-            elif m >= 60:
-                rec.grade = "C"
-            elif m >= 40:
-                rec.grade = "D"
-            else:
-                rec.grade = "F"
+
+# class StudentSubjectLine(models.Model):
+#     _name = 'student.subject.line'
+#     _description = 'Student Subject Marks'
+
+#     student_id = fields.Many2one('student.student', string="Student", ondelete="cascade")
+#     subject_id = fields.Many2one('school.subject', string="Subject", required=True)
+#     subject_code = fields.Char(related='subject_id.code', string="Subject Code", store=True)
+#     marks = fields.Float(string="Marks", default=0.0)
+#     grade = fields.Char(string="Grade", compute='_compute_grade', store=True)
+
+#     @api.depends('marks')
+#     def _compute_grade(self):
+#         for rec in self:
+#             m = rec.marks
+#             if m is None:
+#                 rec.grade = False
+#             elif m >= 90:
+#                 rec.grade = "A"
+#             elif m >= 75:
+#                 rec.grade = "B"
+#             elif m >= 60:
+#                 rec.grade = "C"
+#             elif m >= 40:
+#                 rec.grade = "D"
+#             else:
+#                 rec.grade = "F"
 
     #all onetomany commands:-  
     
     #(0,0) : -  this is use for creating record :-  
-    def action_add_sub(self):
-            self.write({'subject_line_ids':[
-                    (0,0,{
-                        'subject_id':1,
-                        'marks':89,
+    # def action_add_sub(self):
+    #         self.write({'subject_line_ids':[
+    #                 (0,0,{
+    #                     'subject_id':1,
+    #                     'marks':89,
 
-                    })
-            ]})
+    #                 })
+    #         ]})
   

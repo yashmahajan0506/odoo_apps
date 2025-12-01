@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+
+    <record id="view_school_teacher_list" model="ir.ui.view">
+        <field name="name">school.teacher.list</field>
+        <field name="model">school.teacher</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="teacher_id"/>
+                <field name="age"/>
+                <field name="department_id"/>
+                <field name="expertise_subject" />
+            </list>
+        </field>
+    </record>
+
+    <record id="view_school_teacher_form" model="ir.ui.view">
+        <field name="name">school.teacher.form</field>
+        <field name="model">school.teacher</field>
+        <field name="arch" type="xml">
+            <form string="Teacher">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="teacher_id"/>
+                        <field name="age"/>
+                        <field name="department_id"/>
+                        <field name="expertise_subject" widget="many2many_tags"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- <menuitem id="menu_school_teacher"
+              name="Teacher List"
+              parent="menu_school_teacher_parent"
+              action="action_school_teacher"
+              sequence="3"/> -->
+
+</odoo>

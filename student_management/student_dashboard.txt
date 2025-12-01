@@ -5,7 +5,7 @@ Below is the ideal combination of cards, graphs, lists, and KPIs for your dashbo
 ✅ 1. Top Summary Cards (KPIs)
 
 Use 4–6 colored cards at the top.
-
+    
 Recommended KPIs:
 
 Total Students

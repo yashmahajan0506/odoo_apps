@@ -1,30 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
-    <templates>
-        <t t-name="student_management.StudentDashboardMain">
-            <div class="p-4">
-                <h2 class="mb-3">📊 Student Dashboard</h2>
+<templates xml:space="preserve">
 
-                <div class="row">
-                    <div class="col-3 card p-3 m-2">
-                        <h4>Total Students</h4>
-                        <span t-esc="state.total_students"/>
-                    </div>
+    <t t-name="student_management.StudentDashboardMain">
 
-                    <div class="col-3 card p-3 m-2">
-                        <h4>Active Students</h4>
-                        <span t-esc="state.active_students"/>
-                    </div>
+        <link rel="stylesheet"
+              href="/student_management/static/src/css/dashboard.css"/>
 
-                    <div class="col-3 card p-3 m-2">
-                        <h4>Male</h4>
-                        <span t-esc="state.male_students"/>
-                    </div>
+        <div class="student-dashboard-container container mt-4">
+            <div class="dashboard-animated-bg"></div>
 
-                    <div class="col-3 card p-3 m-2">
-                        <h4>Female</h4>
-                        <span t-esc="state.female_students"/>
+            <h2 class="text-center mb-4 dashboard-title">
+                🎓 Student Analytics Dashboard
+            </h2>
+
+            <!-- CARDS -->
+            <div class="row g-4">
+
+                <div class="col-md-3">
+                    <div class="dash-card"
+                         t-on-click="(ev) => this.openStudentList(ev, 'all')">
+                        <h5>Total Students</h5>
+                        <div class="value" t-esc="state.total_students"/>
                     </div>
                 </div>
+
+                <div class="col-md-3">
+                    <div class="dash-card"
+                         t-on-click="(ev) => this.openStudentList(ev, 'active')">
+                        <h5>Active Students</h5>
+                        <div class="value" t-esc="state.active_students"/>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="dash-card"
+                         t-on-click="(ev) => this.openStudentList(ev, 'male')">
+                        <h5>Male</h5>
+                        <div class="value" t-esc="state.male_students"/>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="dash-card"
+                         t-on-click="(ev) => this.openStudentList(ev, 'female')">
+                        <h5>Female</h5>
+                        <div class="value" t-esc="state.female_students"/>
+                    </div>
+                </div>
+
             </div>
-        </t>
-    </templates>
+
+            <!-- CHARTS -->
+            <div class="row mt-5">
+
+                <div class="col-md-6">
+                    <div class="chart-box">
+                        <h5 class="text-center">Gender Breakdown</h5>
+                        <canvas id="pieChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="chart-box">
+                        <h5 class="text-center">Total vs Active</h5>
+                        <canvas id="barChart"></canvas>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    </t>
+
+</templates>
