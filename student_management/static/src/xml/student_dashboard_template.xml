@@ -12,13 +12,39 @@
             <h2 class="text-center mb-4 dashboard-title">
                 🎓 Student Analytics Dashboard
             </h2>
+        
+<div class="d-flex justify-content-center mb-4">
 
-           
-            
-            
+        <div class="input-group w-50">
+         <input type="text" class="form-control"
+                placeholder="Search students..."
+                t-att-value="state.searchQuery"
+                t-on-input="onSearchInput"/>
+        
+         <button class="btn btn-outline-primary"
+                 t-on-click="performSearch">
+             Search
+         </button>
+    </div>
+
+
+    <div>
+        <select class="form-select w-auto" t-model="state.selectedFilter" t-on-change="applyFilter">
+            <option value="">-- Filter By --</option>
+            <option value="active">Active Students</option>
+            <option value="male">Male Students</option>
+            <option value="female">Female Students</option>
+            <option value="department">Departments</option>
+            <option value="subject">Subjects</option>
+        </select>
+    </div>
+
+</div>
+
+     
     <div class="d-flex justify-content-between align-items-center mb-3">
 
-    <!-- LEFT BUTTONS -->
+
     <div class="d-flex gap-2">
         <button type="button" class="btn btn-secondary" t-on-click="addStudent">
             ➕ Add Student
@@ -33,7 +59,7 @@
         </button>
     </div>
 
-    <!-- RIGHT BUTTON -->
+
     <div>
         <button class="btn btn-primary" t-on-click="downloadDashboardPDF">
             📄 Download Dashboard

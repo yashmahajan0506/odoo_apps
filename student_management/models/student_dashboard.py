@@ -1,6 +1,9 @@
 from odoo import models, fields, api
 import base64
+import io
+import matplotlib.pyplot as plt
 class StudentDashboard(models.Model):
+    
             _name = "student.dashboard"
             _description = "Student Dashboard"
             
@@ -19,6 +22,7 @@ class StudentDashboard(models.Model):
 
             @api.depends()
             def _compute_data(self):
+                
                 Student = self.env["student.student"]
                 Department = self.env["school.department"]
                 Subject = self.env["school.subject"]
@@ -26,7 +30,6 @@ class StudentDashboard(models.Model):
                 for rec in self:
                     rec.total_students = Student.search_count([])
                     rec.active_students = Student.search_count([("is_active", "=", True)])
-                    # rec.alumni_students = Student.search_count([("state", "=", "alumni")])
                     rec.male_students = Student.search_count([("gender", "=", "male")])
                     rec.female_students = Student.search_count([("gender", "=", "female")])
                     rec.department_count = Department.search_count([])
@@ -38,18 +41,17 @@ class StudentDashboard(models.Model):
                 Department = self.env["school.department"]
                 Subject = self.env["school.subject"]
                 
-                data = {
+                data ={
                     "total_students": Student.search_count([]),
                     "active_students": Student.search_count([("is_active", "=", True)]),
                     "male_students" : Student.search_count([("gender", "=", "male")]),
                     "female_students" : Student.search_count([("gender", "=", "female")]),
                     "department_count": Department.search_count([]),
-                    "subject_count": Subject.search_count([]),
-                    
+                    "subject_count": Subject.search_count([]),  
                 }
-
+                
                 html = self.env["ir.qweb"]._render("student_management.student_dashboard_simple_pdf", data)
-
+                
                 pdf_content = self.env["ir.actions.report"]._run_wkhtmltopdf(
                     [html],
                     landscape=False,
@@ -58,3 +60,4 @@ class StudentDashboard(models.Model):
                 return {
                     "pdf_base64": base64.b64encode(pdf_content).decode(),
                 }
+            
