@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Add snippet inside Images category -->
+<!--
+    <template id="my_custom_image_snippet" inherit_id="website.snippets" priority="16">
+        <xpath expr="//div[@id='snippet_structure']/div[@data-name='Images']" position="inside">
+            <t t-call="sales_dashboard.my_image_snippet_block"/>
+        </xpath>
+    </template>
+-->
+</odoo>

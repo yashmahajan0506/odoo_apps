@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_order_tree_inherit_smart_filter" model="ir.ui.view">
+        <field name="name">sale.order.tree.smart.filter.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//div[@class='o_control_panel']" position="inside">
+
+                <t t-call="custom_sale_smart_filter.CustomSaleSmartFilter"/>
+
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates id="template" xml:space="preserve">
+
+    <!-- Tile inside the snippet sidebar -->
+    <t t-name="sales_dashboard.my_image_snippet_block">
+        <div class="o_snippet_thumbnail" 
+             data-snippet="sales_dashboard.my_image_snippet"
+             data-name="My Custom Image">
+            <img src="/sales_dashboard/static/src/snippets/my_image_box/my_custom_image.jpg"
+                 class="img img-fluid"/>
+            <span>Custom Image</span>
+        </div>
+    </t>
+
+    <!-- The actual snippet dropped in website -->
+    <t t-name="sales_dashboard.my_image_snippet">
+        <div class="my-custom-image-wrapper text-center py-3">
+            <img src="/sales_dashboard/static/src/snippets/my_image_box/my_custom_image.jpg"
+                 class="img img-fluid rounded shadow"/>
+        </div>
+    </t>
+
+</templates>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="SalesDashboardTemplate" name="Sales Dashboard">
+        <div class="o_sales_dashboard_container p-4">
+            <h2 class="mb-3">📊 Sales Dashboard</h2>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card p-3 text-center">
+                        <h5>Total Sales</h5>
+                        <h3><t t-esc="state.total_sales"/></h3>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card p-3 text-center">
+                        <h5>Total Orders</h5>
+                        <h3><t t-esc="state.total_orders"/></h3>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card p-3 text-center">
+                        <h5>Today</h5>
+                        <h3><t t-esc="state.today_sales"/></h3>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card p-3 text-center">
+                        <h5>This Month</h5>
+                        <h3><t t-esc="state.month_sales"/></h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <canvas id="salesBarChart"></canvas>
+                </div>
+                <div class="col-md-6">
+                    <canvas id="topProductsChart"></canvas>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <canvas id="topCustomersChart"></canvas>
+                </div>
+            </div>
+
+        </div>
+    </template>
+</odoo>

@@ -1,7 +1,5 @@
 from odoo import models, fields, api
 import base64
-import io
-import matplotlib.pyplot as plt
 class StudentDashboard(models.Model):
     
             _name = "student.dashboard"

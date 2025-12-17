@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="sales_dashboard.AttachmentPreviewField" owl="1">
+        <div class="o_attachment_preview_field" t-if="hasAttachments">
+            <button class="btn btn-sm btn-link" t-on-click="onPreview" title="Preview">
+                <i class="fa fa-eye fa-lg"/>
+            </button>
+        </div>
+    </t>
+
+    <t t-name="sales_dashboard.AttachmentPreviewDialog" owl="1">
+        <Dialog title="'Preview Attachments'" size="'xl'">
+            <div class="o_attachment_preview_content">
+                <t t-foreach="attachments" t-as="att" t-key="att.id">
+                    <div class="mb-4 text-center">
+                        <div class="mb-2 font-weight-bold text-muted">
+                            <t t-esc="att.name"/>
+                        </div>
+                        
+                        <!-- Image Viewer: Renders as standard Image, no editor tools -->
+                        <t t-if="att.mimetype.startsWith('image/')">
+                            <img t-attf-src="/web/content/{{att.id}}" 
+                                 class="img-fluid border rounded shadow-sm"
+                                 style="max-height: 80vh; max-width: 100%; display: inline-block;"/>
+                        </t>
+
+                        <!-- PDF Viewer: Embeds with toolbar disabled -->
+                        <t t-elif="att.mimetype === 'application/pdf'">
+                            <iframe t-attf-src="/web/content/{{att.id}}?#toolbar=0&amp;navpanes=0&amp;scrollbar=0" 
+                                    style="width: 100%; height: 80vh; border: none;"
+                                    allowfullscreen="true"/>
+                        </t>
+
+                        <!-- Fallback -->
+                        <t t-else="">
+                            <div class="alert alert-warning p-3">
+                                <i class="fa fa-exclamation-triangle mr-2"/>
+                                <span>Preview not available for <b t-esc="att.mimetype"/>.</span>
+                                <a t-attf-href="/web/content/{{att.id}}?download=true" class="ml-2 btn btn-sm btn-secondary">
+                                    Download
+                                </a>
+                            </div>
+                        </t>
+                    </div>
+                </t>
+            </div>
+            <t t-set-slot="footer">
+                <button class="btn btn-secondary" t-on-click="props.close">Close</button>
+            </t>
+        </Dialog>
+    </t>
+
+</templates>

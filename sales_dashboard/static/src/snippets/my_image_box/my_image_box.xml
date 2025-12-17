@@ -1,0 +1,15 @@
+<odoo>
+    <template id="my_image_box_template">
+
+        <t t-name="sales_dashboard.my_image_box" class="o_snippet">
+            <section class="my-image-box text-center py-5">
+                <img src="/sales_dashboard/static/src/snippets/my_image_box/sunflower_image.jpg"
+                     class="my-custom-image"
+                     alt="Custom Image"/>
+
+                <h3 class="mt-3">My Custom Image Snippet</h3>
+            </section>
+        </t>
+
+    </template>
+</odoo>

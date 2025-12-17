@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_backend" inherit_id="web.assets_backend" name="sales_dashboard assets">
+        <xpath expr="." position="inside">
+            <script type="module" src="/sales_dashboard/static/src/js/sales_dashboard.js"/>
+            <script type="module" src="/sales_dashboard/static/src/js/attachment_preview_widget.js"/>
+            <link rel="stylesheet" href="/sales_dashboard/static/src/css/attachment_preview.css"/>
+        </xpath>
+    </template>
+</odoo>

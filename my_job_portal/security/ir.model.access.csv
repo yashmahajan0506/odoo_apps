@@ -1,8 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_job_position_admin,access_job_position_admin,model_my_job_portal_job_position,base.group_system,1,1,1,1
-access_job_position_hr,access_job_position_hr,model_my_job_portal_job_position,my_job_portal.group_job_hr_manager,1,1,1,1
-access_job_position_user,access_job_position_user,model_my_job_portal_job_position,my_job_portal.group_job_user,1,0,0,0
-
-access_job_application_admin,access_job_application_admin,model_my_job_portal_job_application,base.group_system,1,1,1,1
-access_job_application_hr,access_job_application_hr,model_my_job_portal_job_application,my_job_portal.group_job_hr_manager,1,1,1,1
-access_job_application_user,access_job_application_user,model_my_job_portal_job_application,my_job_portal.group_job_user,1,0,1,1

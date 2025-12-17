@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="template_sales_dashboard_view" name="Sales Dashboard View">
+        <t t-name="sales_dashboard.sales_dashboard_view">
+            <div class="o_sales_dashboard">
+                <h2 class="text-center mb-4">Sales Dashboard</h2>
+                <div class="row text-center">
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>Total Orders</h5>
+                                <h3 t-esc="state.total_orders"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>Confirmed Orders</h5>
+                                <h3 t-esc="state.confirmed_orders"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>Quotations</h5>
+                                <h3 t-esc="state.quotations"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>Total Revenue</h5>
+                                <h3 t-esc="state.total_amount" t-options='{"widget": "monetary"}'/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+    
+</odoo>

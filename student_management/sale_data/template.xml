@@ -1,0 +1,54 @@
+<odoo>
+    <template id="sales_dashboard_template" name="Sales Dashboard" website="True">
+        <t t-call="website.layout">
+            <div class="container py-4">
+                <h2>📊 Sales Dashboard</h2>
+
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="card p-3">
+                            <h5>Total Sales Today</h5>
+                            <h3 t-esc="total_sales_today"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card p-3">
+                            <h5>Total Sales This Month</h5>
+                            <h3 t-esc="total_sales_month"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <h5>Top 5 Products</h5>
+                        <ul class="list-group">
+                            <t t-foreach="top_products" t-as="p">
+                                <li class="list-group-item">
+                                    <span t-esc="p.name"/> - Qty: <span t-esc="p.qty_available"/>
+                                </li>
+                            </t>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Top 5 Customers</h5>
+                        <ul class="list-group">
+                            <t t-foreach="top_customers" t-as="c">
+                                <li class="list-group-item">
+                                    <span t-esc="c.name"/> - Credit: <span t-esc="c.credit"/>
+                                </li>
+                            </t>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div id="sales_chart" style="height: 400px;"></div>
+                    </div>
+                </div>
+
+            </div>
+        </t>
+    </template>
+</odoo>

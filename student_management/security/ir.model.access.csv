@@ -1,10 +1,6 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_student_student_user,access.student.student.user,model_student_student,base.group_user,1,1,1,1
-access_student_dashboard_user,access_student_dashboard_user,model_student_dashboard,base.group_user,1,1,1,1
-access_student_user,access.student.user,model_student_student,student_management.group_student_user,1,0,0,0
-access_teacher_user,access.teacher.user,model_student_student,student_management.group_teacher_user,1,1,1,0
-access_student_event_user,student.event.user,model_student_event,student_management.group_student_user,1,0,0,0
-access_student_event_teacher,student.event.teacher,model_student_event,student_management.group_teacher_user,1,1,1,1
+access_student_dashboard_user,access_student_dashboard_user,model_student_dashboard,base.group_user,1,1,1,
 access_student_event_admin,student.event.admin,model_student_event,base.group_system,1,1,1,1
 access_school_teacher_admin,school.teacher.admin,model_school_teacher,base.group_system,1,1,1,1
 access_school_teacher,access_school_teacher,model_school_teacher,base.group_user,1,1,1,1

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="sales_dashboard.SalesSystraySearch">
+        <div
+            class="o_systray_item d-flex align-items-center px-2"
+            role="button"
+            title="Open Sales Smart Search"
+            t-on-click="openSearchPanel"
+        >
+            <i class="fa fa-search" style="font-size:16px;" />
+        </div>
+    </t>
+
+</templates>

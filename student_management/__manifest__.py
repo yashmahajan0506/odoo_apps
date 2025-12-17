@@ -12,6 +12,7 @@
     'assets': {
           'web.assets_backend': [
                 # 'student_management/static/lib/chart/chart.umd.js',
+                "student_management/static/src/js/sales_dashboard.js",
                 "student_management/static/src/js/student_dashboard.js",
                 "student_management/static/src/xml/student_dashboard_template.xml",
                 "student_management/static/src/css/student_dashboard.css",
@@ -34,11 +35,11 @@
     'version': '1.0',   
 
     # any module necessary for this one to work correctly
-    'depends': ['base','mail','sale_management'],
+    'depends': ['base','mail','sale_management','sale','web'],
 
     # always loaded
     'data': [
-        'security/security.xml',
+        # 'security/security.xml',
         # 'security/record_rules.xml',
         'security/ir.model.access.csv',
         'data/cron.xml',
@@ -48,6 +49,9 @@
         #  'data/website_page.xml',
         'data/student_cron.xml',    
         'data/addmission_confirmation_mail_template.xml',
+        'sale_data/sales_sequence.xml',
+        # 'sale_data/sale_order_view.xml',
+        'sale_dashboard/sales_dashboard_template.xml',
         'views/student_views.xml',
         'views/menu.xml', 
         'views/student_event_views.xml',
@@ -58,11 +62,11 @@
         'views/teachers_views.xml',
         'views/departments.xml',
         'views/subject_views.xml',
+        'sale_data/student_menu.xml',
         'views/student_dashboard_pdf_template.xml',
         'reports/report_student_template.xml',
         'reports/report.xml',
 
-        
         
            ],
     'installable':True,
