@@ -19,17 +19,22 @@ class SaleOrder(models.Model):
     def _compute_approval_required(self):
         for order in self:
             discount_exceeded = any(
-                line.discount > 15 for line in order.order_line
+                line.discount > 10 for line in order.order_line
             )
             amount_exceeded = order.amount_total > 100000
             order.approval_required = discount_exceeded or amount_exceeded
 
     def action_confirm(self):
-        for order in self:
-            if order.approval_required and order.state == "draft":
-                order.state = "waiting_approval"
-                return True
-        return super().action_confirm()
+        orders_needing_approval = self.filtered(lambda o: o.approval_required and o.state in ('draft', 'sent'))
+        orders_to_confirm = self - orders_needing_approval
+
+        if orders_needing_approval:
+            orders_needing_approval.write({'state': 'waiting_approval'})
+
+        if orders_to_confirm:
+            return super(SaleOrder, orders_to_confirm).action_confirm()
+            
+        return True
 
     def action_approve(self):
         self.ensure_one()
@@ -41,9 +46,28 @@ class SaleOrder(models.Model):
         self.ensure_one()
         if self.state != "approved":
             raise UserError("Order must be approved first.")
+        
+        self.write({'state': 'sent'})
         return super().action_confirm()
 
-
+    def action_rainbow_effect(self):
+        return {
+            'effect': {
+                'fadeout': 'slow',
+                'message': 'Rainbow Effect Triggered!',
+                'type': 'rainbow_man',
+            }
+        }
+        
+    def get_all_active_id(self):
+        active_ids=self.env.context.get("active_ids",[])
+        
+        print(active_ids)
+        
+        orders=self.env['sale.order'].browse(active_ids)
+        for order in orders:
+            print(order.name ,order.state)
+    
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 

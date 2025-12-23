@@ -16,20 +16,14 @@
             'web.assets_backend': [
                 "sales_dashboard/static/src/js/sales_dashboard.js",
                 "sales_dashboard/static/src/js/custom_sale_smart_filter.js",
+                "sales_dashboard/static/src/js/counter_widget.js",
                 "sales_dashboard/static/src/js/attachment_preview_widget.js",
                 "sales_dashboard/static/src/xml/sales_dashboard_template.xml",
-                # "sales_dashboard/static/src/xml/counter_widget_template.xml",
+                "sales_dashboard/static/src/xml/counter_widget_template.xml",
                 "sales_dashboard/static/src/xml/custom_sale_smart_filter.xml",
                 "sales_dashboard/static/src/xml/attachment_preview.xml",
-
                 "sales_dashboard/static/src/scss/sales_dashboard.scss",
 
-                # "sales_dashboard/static/src/snippets/my_image_box/my_image_box.xml",
-                # "sales_dashboard/static/src/snippets/my_image_box/my_image_box.scss",
-                # "sales_dashboard/static/src/scss/sales_dashboard.scss",
-                
-                "sales_dashboard/static/src/systray/sales_systray_toggle.js",
-                "sales_dashboard/static/src/systray/sales_systray_toggle.xml",
         ],
         },
 
@@ -48,14 +42,9 @@
         # 'security/ir.model.access.csv',
         'views/views.xml',
         'views/sale_order_view.xml',
-        # 'views/templates.xml',
         'views/sales_base_menu.xml',
-        #  'views/sales_dashboard_template.xml',
         'views/sales_dashboard_template.xml',
-        # 'views/assests.xml',
-       'views/snippet_templates.xml',
-       'views/sale_order_view.xml'
-    #    'views/attachment_preview_templates.xml',
+        'views/snippet_templates.xml'
     ],
     # only loaded in demonstration mode
     'demo': [

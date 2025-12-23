@@ -7,6 +7,7 @@ import { standardFieldProps } from "@web/views/fields/standard_field_props";
 export class AttachmentPreviewDialog extends Component {
     static components = { Dialog };
     static template = "sales_dashboard.AttachmentPreviewDialog";
+
     static props = {
         close: Function,
         attachments: Array,
@@ -15,6 +16,9 @@ export class AttachmentPreviewDialog extends Component {
     get attachments() {
         return this.props.attachments || [];
     }
+    // get attachmentcount(){
+    //     return this.attachments.length;
+    // }
 }
 
 export class AttachmentPreviewField extends Component {

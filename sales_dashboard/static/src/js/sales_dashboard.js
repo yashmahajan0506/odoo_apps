@@ -1,9 +1,9 @@
-import { Component, useState, onMounted } from "@odoo/owl";
+import { Component, useState, onMounted, onWillUnmount, useRef } from "@odoo/owl";
 import { registry } from "@web/core/registry";
 import { useService } from "@web/core/utils/hooks";
 import { loadBundle } from "@web/core/assets";
-import { CounterWidget } from "./counter_widget";
 import { CustomSaleSmartFilter } from "./custom_sale_smart_filter";
+import { CounterWidget } from "./counter_widget";
 
 export class SalesDashboard extends Component {
     static components = { CounterWidget, CustomSaleSmartFilter };
@@ -11,6 +11,8 @@ export class SalesDashboard extends Component {
     setup() {
         this.orm = useService("orm");
         this.action = useService("action");
+        this.pieChartRef = useRef("pieChart");
+        this.barChartRef = useRef("barChart");
 
         this.state = useState({
             total_orders: 0,
@@ -25,11 +27,14 @@ export class SalesDashboard extends Component {
         onMounted(() => {
             this.loadData().then(() => this.renderCharts());
         });
+
+        onWillUnmount(() => {
+            if (this.pieChartInstance) this.pieChartInstance.destroy();
+            if (this.barChartInstance) this.barChartInstance.destroy();
+        });
     }
 
-    // ----------------------------------------------------------
-    // LOAD DATA
-    // ----------------------------------------------------------
+
     async loadData() {
         // Check for context params from systray search
         const context = this.props.action && this.props.action.context;
@@ -58,9 +63,6 @@ export class SalesDashboard extends Component {
         }
     }
 
-    // ----------------------------------------------------------
-    // SEARCH + FILTER
-    // ----------------------------------------------------------
     handleFilterUpdate(data) {
         this.state.searchQuery = data.search;
         this.state.activeFilter = data.filter;
@@ -91,36 +93,54 @@ export class SalesDashboard extends Component {
     // ----------------------------------------------------------
     async renderCharts() {
         await loadBundle("web.chartjs_lib");
+
+        if (!window.Chart) {
+            console.warn("Chart.js not loaded");
+            return;
+        }
+
         const state = this.state;
 
+        // Destroy previous instances to avoid errors/overlays
+        if (this.pieChartInstance) {
+            this.pieChartInstance.destroy();
+        }
+        if (this.barChartInstance) {
+            this.barChartInstance.destroy();
+        }
+
         // PIE CHART
-        new Chart(document.getElementById("salesPieChart"), {
-            type: "pie",
-            data: {
-                labels: ["Confirmed Orders", "Quotations"],
-                datasets: [
-                    {
-                        data: [state.confirmed_orders, state.quotations],
-                        backgroundColor: ["#6a89ff", "#ff6fa8"],
-                    },
-                ],
-            },
-        });
+        if (this.pieChartRef.el) {
+            this.pieChartInstance = new window.Chart(this.pieChartRef.el, {
+                type: "pie",
+                data: {
+                    labels: ["Confirmed Orders", "Quotations"],
+                    datasets: [
+                        {
+                            data: [state.confirmed_orders, state.quotations],
+                            backgroundColor: ["#6a89ff", "#ff6fa8"],
+                        },
+                    ],
+                },
+            });
+        }
 
         // BAR CHART
-        new Chart(document.getElementById("salesBarChart"), {
-            type: "bar",
-            data: {
-                labels: ["Total Orders", "Total Amount"],
-                datasets: [
-                    {
-                        data: [state.total_orders, state.total_amount],
-                        backgroundColor: ["#55efc4", "#74b9ff"],
-                    },
-                ],
-            },
-            options: { plugins: { legend: { display: false } } }
-        });
+        if (this.barChartRef.el) {
+            this.barChartInstance = new window.Chart(this.barChartRef.el, {
+                type: "bar",
+                data: {
+                    labels: ["Total Orders", "Total Amount"],
+                    datasets: [
+                        {
+                            data: [state.total_orders, state.total_amount],
+                            backgroundColor: ["#55efc4", "#74b9ff"],
+                        },
+                    ],
+                },
+                options: { plugins: { legend: { display: false } } }
+            });
+        }
     }
 }
 

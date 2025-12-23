@@ -1,6 +1,12 @@
 import { Component, useState } from "@odoo/owl";
 
 export class CounterWidget extends Component {
+    static template = "sales_dashboard.CounterWidget";
+    static props = {
+        value: { type: Number },
+        onChange: { type: Function },
+    };
+
     setup() {
         this.state = useState({
             value: this.props.value || 0,
@@ -9,15 +15,15 @@ export class CounterWidget extends Component {
 
     increment() {
         this.state.value++;
-        this.props.onChange?.(this.state.value);
+        if (this.props.onChange) {
+            this.props.onChange(this.state.value);
+        }
     }
 
     decrement() {
-        if (this.state.value > 0) {
-            this.state.value--;
-            this.props.onChange?.(this.state.value);
+        this.state.value--;
+        if (this.props.onChange) {
+            this.props.onChange(this.state.value);
         }
     }
 }
-
-CounterWidget.template = "sales_dashboard.CounterWidget";
