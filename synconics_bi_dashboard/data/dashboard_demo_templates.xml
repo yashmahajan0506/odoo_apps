@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="template_sales_dashboard" model="dashboard.template">
+            <field name="name">Sales Dashboard</field>
+            <field name="technical_name">sales_dashboard_template</field>
+            <field name="depends_on">sale</field>
+            <field name="definition"><![CDATA[
+{
+    "json_payload": [
+        {
+            "name": "Total Sales",
+            "model": "sale.order",
+            "chart_type": "kpi",
+            "layout_type": "layout1",
+            "tile_layout_type": "layout1",
+            "theme": "animated",
+            "kpi_model": "sale.order",
+            "kpi_measurement_field_id": "amount_total",
+            "kpi_data_type": "sum",
+            "kpi_view_type": "standard",
+            "chart_position": {
+                "x": 0,
+                "y": 0,
+                "w": 3,
+                "h": 2
+            },
+            "todo_action_ids": [],
+            "chart_multiplier_ids": [],
+            "list_measure_ids": [],
+            "list_field_ids": []
+        },
+        {
+            "name": "Quotation Count",
+            "model": "sale.order",
+            "chart_type": "kpi",
+            "layout_type": "layout1",
+            "tile_layout_type": "layout1",
+            "theme": "animated",
+            "kpi_model": "sale.order",
+            "kpi_measurement_field_id": "id",
+            "kpi_data_type": "count",
+            "chart_position": {
+                "x": 3,
+                "y": 0,
+                "w": 3,
+                "h": 2
+            },
+            "todo_action_ids": [],
+            "chart_multiplier_ids": [],
+            "list_measure_ids": [],
+            "list_field_ids": []
+        }
+    ]
+}
+            ]]></field>
+        </record>
+    </data>
+</odoo>

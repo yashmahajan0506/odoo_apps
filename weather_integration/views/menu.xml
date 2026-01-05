@@ -1,0 +1,10 @@
+<odoo>
+    <menuitem id="weather_root_menu" name="Weather"/>
+
+    <menuitem
+        id="weather_menu"
+        name="Weather Info"
+        parent="weather_root_menu"
+        action="action_weather_info"
+    />
+</odoo>

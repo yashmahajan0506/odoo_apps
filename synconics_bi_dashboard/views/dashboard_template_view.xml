@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_dashboard_template_tree" model="ir.ui.view">
+        <field name="name">dashboard.template.tree</field>
+        <field name="model">dashboard.template</field>
+        <field name="arch" type="xml">
+            <list string="Dashboard Templates">
+                <field name="name"/>
+                <field name="depends_on"/>
+                <field name="state" widget="badge" decoration-success="state == 'active'" decoration-muted="state == 'archived'"/>
+                <button name="action_unarchive" string="Unarchive" type="object" class="btn-primary" 
+                        invisible="state == 'active'"/>
+                <button name="action_archive" string="Archive" type="object" class="btn-secondary" 
+                        invisible="state == 'archived'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_dashboard_template_form" model="ir.ui.view">
+        <field name="name">dashboard.template.form</field>
+        <field name="model">dashboard.template</field>
+        <field name="arch" type="xml">
+            <form string="Dashboard Template">
+                <header>
+                    <button name="action_unarchive" string="Unarchive" type="object" class="btn-primary" 
+                            invisible="state == 'active'"/>
+                    <button name="action_archive" string="Archive" type="object" class="btn-secondary" 
+                            invisible="state == 'archived'"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="technical_name"/>
+                            <field name="depends_on"/>
+                        </group>
+                        <group>
+                            <field name="dashboard_id" readonly="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Definition (JSON)">
+                            <field name="definition" widget="ace" options="{'mode': 'json'}"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_dashboard_template" model="ir.actions.act_window">
+        <field name="name">Dashboard Templates</field>
+        <field name="res_model">dashboard.template</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Dashboard Template
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_dashboard_template"
+              parent="synconics_bi_dashboard.dashboard_configuration_menu"
+              action="action_dashboard_template"
+              sequence="20"/>
+</odoo>

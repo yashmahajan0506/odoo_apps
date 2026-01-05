@@ -1,3 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_wb_so_tnc,access_wb_so_tnc,wb_terms_and_conditions.model_wb_so_tnc,base.group_user,1,1,1,1
-access_wb_po_tnc,access_wb_po_tnc,wb_terms_and_conditions.model_wb_po_tnc,base.group_user,1,1,1,1

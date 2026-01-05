@@ -1,0 +1,57 @@
+<odoo>
+    <record id="view_weather_form" model="ir.ui.view">
+        <field name="name">weather.info.form</field>
+        <field name="model">weather.info</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="action_fetch_weather"
+                        type="object"
+                        string="Fetch Weather"
+                        class="btn-primary"
+                        icon="fa-refresh"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name" placeholder="e.g. London, Tokyo..."/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="temperature"/>
+                            <field name="humidity"/>
+                        </group>
+                        <group>
+                            <field name="weather_condition"/>
+                            <field name="last_updated"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_weather_list" model="ir.ui.view">
+        <field name="name">weather.info.list</field>
+        <field name="model">weather.info</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="temperature"/>
+                <field name="humidity"/>
+                <field name="weather_condition"/>
+                <field name="last_updated"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_weather_info" model="ir.actions.act_window">
+        <field name="name">Weather</field>
+        <field name="res_model">weather.info</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>
